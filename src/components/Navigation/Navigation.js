@@ -8,10 +8,10 @@ const Navigation = ({ loggedIn }) => {
         {loggedIn ? (
           <>
             <ul className="navigation__links">
-              <li className="navigation__item">
+              <li>
                 <Link to="/movies" className="navigation__link">Фильмы</Link>
               </li>
-              <li className="navigation__item">
+              <li>
                 <Link to="/saved-movies" className="navigation__link">Сохраненные фильмы</Link>
               </li>
             </ul>

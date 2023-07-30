@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AccountLink from '../AccountLink/AccountLink';
 
 const Navigation = ({ loggedIn }) => {
@@ -9,10 +9,10 @@ const Navigation = ({ loggedIn }) => {
           <>
             <ul className="navigation__links">
               <li>
-                <Link to="/movies" className="navigation__link">Фильмы</Link>
+              <NavLink to="/movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Фильмы</NavLink>
               </li>
               <li>
-                <Link to="/saved-movies" className="navigation__link">Сохраненные фильмы</Link>
+              <NavLink to="/saved-movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Сохраненные фильмы</NavLink>
               </li>
             </ul>
             <AccountLink />

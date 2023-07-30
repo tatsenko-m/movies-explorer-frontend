@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import headerLogo from '../../images/header-logo.svg';
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
   const location = useLocation();
 
   const isHeaderVisible =
@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <>
       {isHeaderVisible && (
-        <header className={`header${location.pathname === '/' ? ' header_unauthorized' : ''}`}>
+        <header className={`header${location.pathname === '/' ? ' header_landing' : ''}`}>
           <div className="header__container">
             <Link to="/" className="header__logo-link">
               <img
@@ -21,7 +21,7 @@ const Header = () => {
                 alt="Логотип учебного проекта"
               />
             </Link>
-            <Navigation />
+            <Navigation loggedIn={loggedIn} />
           </div>
         </header>
       )}

@@ -8,14 +8,16 @@ const Navigation = ({ loggedIn }) => {
         {loggedIn ? (
           <>
             <ul className="navigation__links">
-              <li>
-              <NavLink to="/movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Фильмы</NavLink>
+              <li className="navigation__item">
+                <NavLink to="/movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Фильмы</NavLink>
               </li>
-              <li>
-              <NavLink to="/saved-movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Сохраненные фильмы</NavLink>
+              <li className="navigation__item">
+                <NavLink to="/saved-movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Сохраненные фильмы</NavLink>
+              </li>
+              <li className="navigation__item">
+                <AccountLink />
               </li>
             </ul>
-            <AccountLink />
           </>
         ) : (
           <>

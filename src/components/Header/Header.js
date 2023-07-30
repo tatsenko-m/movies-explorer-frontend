@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-// import Navigation from '../Navigation/Navigation';
+import Navigation from '../Navigation/Navigation';
 import headerLogo from '../../images/header-logo.svg';
 
 const Header = () => {
@@ -21,7 +21,7 @@ const Header = () => {
                 alt="Логотип учебного проекта"
               />
             </Link>
-            {/* <Navigation /> */}
+            <Navigation />
           </div>
         </header>
       )}

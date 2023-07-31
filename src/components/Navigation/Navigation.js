@@ -6,7 +6,7 @@ const Navigation = ({ loggedIn }) => {
   return (
     <nav className="navigation">
       {loggedIn ? (
-        <ul className="navigation__links">
+        <ul className="navigation__links navigation__links_type_auth">
           <li className="navigation__item">
             <NavLink to="/movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`}>Фильмы</NavLink>
           </li>
@@ -18,7 +18,7 @@ const Navigation = ({ loggedIn }) => {
           </li>
         </ul>
       ) : (
-        <ul className="navigation__links navigation__links_unauth">
+        <ul className="navigation__links navigation__links_type_unauth">
           <li className="navigation__item">
             <Link to="/signup" className="navigation__signup-link">Регистрация</Link>
           </li>

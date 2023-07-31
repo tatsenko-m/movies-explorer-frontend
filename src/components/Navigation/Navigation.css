@@ -15,10 +15,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.navigation__links_type_auth {
   column-gap: 20px;
 }
 
-.navigation__links_unauth {
+.navigation__links_type_unauth {
   column-gap: 30px;
 }
 
@@ -86,7 +89,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .navigation {
-      display: none;
-    }
+  .navigation__links_type_auth {
+    display: none;
   }
+}

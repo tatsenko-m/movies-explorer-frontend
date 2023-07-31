@@ -93,3 +93,14 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 320px) {
+    .navigation__signup-link {
+      font-size: 10px;
+    }
+    .navigation__signin-link {
+      font-size: 10px;
+      min-width: 54px;
+      padding: 5px 12px;
+    }
+  }

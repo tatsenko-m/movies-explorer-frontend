@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import headerLogo from '../../images/header-logo.svg';
 
-const Header = ({ loggedIn }) => {
+const Header = ({ loggedIn, onOpenMenu }) => {
   const location = useLocation();
 
   const isHeaderVisible =
@@ -22,6 +22,9 @@ const Header = ({ loggedIn }) => {
               />
             </Link>
             <Navigation loggedIn={loggedIn} />
+            {loggedIn && (
+              <button className="header__hamburger-menu-btn" type="button" onClick={onOpenMenu}></button>
+            )}
           </div>
         </header>
       )}

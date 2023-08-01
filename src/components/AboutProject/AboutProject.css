@@ -92,7 +92,6 @@
 
 .about-project__backend-chart-line {
   background-color: #3ddc84;
-  min-width: 100px;
   color: #000;
   grid-column: 1;
   grid-row: 1;
@@ -159,5 +158,60 @@
   }
   .about-project__chart-caption {
     font-family: "Suisse Intl", "Arial", sans-serif;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .about-project {
+    width: 88.75vw;
+    padding: 70px 0;
+  }
+  .about-project__heading {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .about-project__description {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    padding: 60px 0 0;
+  }
+  .about-project__subheading {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .about-project__subheading:nth-of-type(1) {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .about-project__subheading:nth-of-type(2) {
+    grid-row: 3;
+    grid-column: 1;
+  }
+  .about-project__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 0 40px;
+  }
+  .about-project__paragraph:nth-of-type(1) {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .about-project__paragraph:nth-of-type(2) {
+    grid-row: 4;
+    grid-column: 1;
+  }
+  .about-project__chart {
+    grid-template-columns: 35.2% 64.8%;
+    padding: 20px 0 0;
+  }
+  .about-project__chart-text {
+    padding: 11px 0;
+    font-size: 11px;
+  }
+  .about-project__chart-caption {
+    margin: 0;
+    padding-top: 10px;
+    font-size: 11px;
+    line-height: normal;
   }
 }

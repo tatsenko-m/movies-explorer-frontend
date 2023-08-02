@@ -8,26 +8,6 @@
   padding: 110px 0;
 }
 
-.about-project__heading {
-  font-family: "Inter", "Arial", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: normal;
-  letter-spacing: -0.88px;
-  color: #ffffff;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-}
-
-.about-project__heading::after {
-  display: block;
-  content: " ";
-  border-bottom: 1px solid #dadada;
-  padding-top: 23px;
-}
-
 .about-project__description {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -166,10 +146,6 @@
   .about-project {
     width: 88.75vw;
     padding: 70px 0;
-  }
-  .about-project__heading {
-    font-size: 18px;
-    letter-spacing: -0.72px;
   }
   .about-project__description {
     grid-template-columns: 1fr;

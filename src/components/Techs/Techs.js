@@ -1,8 +1,10 @@
+import LandingHeading from '../LandingHeading/LandingHeading';
+
 const Techs = () => {
     return (
       <section className="techs">
         <div className="techs__container">
-          <h2 className="techs__heading">Технологии</h2>
+          <LandingHeading headingText="Технологии" isTechs={true} />
           <h3 className="techs__subheading">7 технологий</h3>
           <p className="techs__caption">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
           <ul className="techs__tech-list">

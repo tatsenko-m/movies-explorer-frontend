@@ -1,0 +1,33 @@
+.landing-heading {
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  align-self: stretch;
+}
+
+.landing-heading::after {
+  display: block;
+  content: " ";
+  border-bottom: 1px solid #dadada;
+  padding-top: 23px;
+}
+
+@media screen and (max-width: 540px) {
+  .landing-heading__heading {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .landing-heading::after {
+    padding-top: 28px;
+  }
+  .landing-heading_techs::after {
+    border-bottom: 1px solid #000;
+  }
+}

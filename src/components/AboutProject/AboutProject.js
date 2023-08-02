@@ -1,7 +1,9 @@
+import LandingHeading from '../LandingHeading/LandingHeading';
+
 const AboutProject = () => {
   return (
     <section className="about-project">
-      <h2 className="about-project__heading">О проекте</h2>
+      <LandingHeading headingText="О проекте" />
       <div className="about-project__description">
         <h3 className="about-project__subheading">Дипломный проект включал 5 этапов</h3>
         <p className="about-project__paragraph">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>

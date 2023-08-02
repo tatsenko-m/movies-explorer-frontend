@@ -16,7 +16,6 @@
   width: 310px;
   height: 304px;
   object-fit: contain;
-  grid-column: 2;
 }
 
 .promo__text {
@@ -28,7 +27,6 @@
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  grid-column: 1;
 }
 
 .promo__title {

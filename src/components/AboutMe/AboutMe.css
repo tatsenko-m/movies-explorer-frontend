@@ -1,0 +1,19 @@
+.about-me {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 89vw;
+  max-width: calc(1280px - (70px * 2));
+  margin: 0 auto;
+  column-gap: 270px;
+}
+
+.about-me__profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -5,7 +5,7 @@
   flex-direction: column;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 100px 0 125px;
+  padding: 100px 0 115px;
 }
 
 .portfolio__heading {
@@ -79,4 +79,25 @@
   letter-spacing: -1.2px;
   margin: 0;
   padding: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .portfolio {
+    width: 87vw;
+    padding: 90px 0 80px;
+  }
+  .portfolio__heading {
+    color: #a0a0a0;
+  }
+  .portfolio__item::after {
+    border-bottom: 1px solid #e6e6e6;
+  }
+  .portfolio__link-text {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
+  .portfolio__arrow-symbol {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
 }

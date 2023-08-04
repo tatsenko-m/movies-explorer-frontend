@@ -101,3 +101,24 @@
     letter-spacing: -1.12px;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .portfolio {
+    width: 91.25vw;
+    padding: 70px 0;
+  }
+  .portfolio__heading {
+    font-size: 14px;
+    margin: 0 0 40px;
+  }
+  .portfolio__link-text {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+  .portfolio__arrow-symbol {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+}

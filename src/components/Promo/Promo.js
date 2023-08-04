@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll';
 import promoLogo from '../../images/promo-logo.svg';
 
 const Promo = () => {
@@ -14,7 +14,7 @@ const Promo = () => {
           <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
           <p className="promo__subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
           <nav>
-            <Link to="/" className="promo__nav-link">Узнать больше</Link>
+            <Link to="about-project" smooth={true} duration={500} className="promo__nav-link">Узнать больше</Link>
           </nav>
         </div>
       </div>

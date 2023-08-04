@@ -1,4 +1,5 @@
 import React from 'react';
+import { Element } from 'react-scroll';
 
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
@@ -10,7 +11,9 @@ const Main = () => {
   return (
     <>
       <Promo />
-      <AboutProject />
+      <Element name="about-project">
+        <AboutProject />
+      </Element>
       <Techs />
       <AboutMe />
       <Portfolio />

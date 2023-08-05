@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchForm = () => {
   return (
@@ -10,7 +10,7 @@ const SearchForm = () => {
           <input className="search__form-input" type="text" placeholder="Фильм" />
           <button className="search__form-button" type="submit">Поиск</button>
         </div>
-        {/* <FilterCheckbox /> */}
+        <FilterCheckbox />
       </form>
     </section>
   );

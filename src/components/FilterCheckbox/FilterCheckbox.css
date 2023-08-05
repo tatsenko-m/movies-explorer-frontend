@@ -63,3 +63,12 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 480px) {
+  .filter {
+    column-gap: 13px;
+  }
+  .filter__caption {
+    font-size: 11px;
+  }
+}

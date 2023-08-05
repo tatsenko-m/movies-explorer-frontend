@@ -86,12 +86,25 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .search {
     width: 91.25vw;
     padding: 70px 0 63px;
   }
   .search__form {
     row-gap: 30px;
+  }
+  .search__form-input {
+    height: 56px;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 0 98px 0 12px;
+  }
+  .search__form-button {
+    min-width: 80px;
+    right: 6px;
+    top: 6px;
+    bottom: 6px;
+    padding: 13px 0;
   }
 }

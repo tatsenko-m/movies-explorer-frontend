@@ -15,10 +15,12 @@ function App() {
   return (
     <>
       <Header loggedIn={loggedIn} />
-      <Routes>
-        <Route path="/" element={isLoading ? <Preloader /> : <Main />} />
-        <Route path="/movies" element={isLoading ? <Preloader /> : <Movies />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={isLoading ? <Preloader /> : <Main />} />
+          <Route path="/movies" element={isLoading ? <Preloader /> : <Movies />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );

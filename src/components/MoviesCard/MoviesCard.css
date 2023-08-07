@@ -91,3 +91,27 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+@media screen and (max-width: 768px) {
+  .movies-card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .movies-card__header {
+    padding: 14px;
+  }
+  .movies-card__title {
+    font-size: 12px;
+  }
+  .movies-card__duration {
+    font-size: 10px;
+  }
+  .movies-card__image {
+    height: 168px;
+  }
+  .movies-card__footer {
+    padding: 14px 0;
+  }
+}

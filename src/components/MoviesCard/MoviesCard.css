@@ -57,6 +57,28 @@
   border-radius: 0 0 6px 6px;
 }
 
+.movies-card__delete-button {
+  width: 100px;
+  height: 29px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 30px;
+  background: #313131;
+  background-image: url(../../images/cross-icon.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.movies-card__delete-button:hover {
+  opacity: 0.8;
+}
+
 .movies-card__save-button {
   width: 100px;
   height: 29px;

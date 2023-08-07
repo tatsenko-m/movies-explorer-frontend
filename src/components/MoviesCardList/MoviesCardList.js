@@ -1,25 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import MoviesCard from '../MoviesCard/MoviesCard';
+const MoviesCardList = ({ isSavedMovies, isMoreButtonVisible, children }) => {
+  const moviesCardsClassName = `movies-cards ${
+    isSavedMovies && "movies-cards_saved"
+  }`;
 
-const MoviesCardList = () => {
   return (
-    <section className="movies-cards">
-      <ul className="movies-cards__list">
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-        <MoviesCard isSavedMovies={false} isSaved={false} />
-      </ul>
-      <button className="movies-cards__more-button">Ещё</button>
+    <section className={moviesCardsClassName}>
+      <ul className="movies-cards__list">{children}</ul>
+      {isMoreButtonVisible && (
+        <button className="movies-cards__more-button">Ещё</button>
+      )}
     </section>
   );
 };

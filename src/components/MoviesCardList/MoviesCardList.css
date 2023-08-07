@@ -6,6 +6,10 @@
   padding: 80px 0;
 }
 
+.movies-cards_saved {
+  padding-bottom: 180px;
+}
+
 .movies-cards__list {
   width: 100%;
   display: grid;
@@ -53,6 +57,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .movies-cards_saved {
+    padding-bottom: 90px;
+  }
   .movies-cards__list {
     column-gap: 24px;
     row-gap: 35px;
@@ -64,6 +71,9 @@
   .movies-cards {
     width: calc(100% - 20px);
     padding: 50px 0 80px;
+  }
+  .movies-cards_saved {
+    padding-bottom: 90px;
   }
   .movies-cards__list {
     row-gap: 16px;

@@ -9,8 +9,7 @@
 
 .header__container {
   display: flex;
-  width: 89vw;
-  max-width: calc(1280px - (70px * 2));
+  min-width: calc(1280px - (70px * 2));
   margin: 0 auto;
   min-height: 74px;
   align-items: center;
@@ -56,6 +55,13 @@
 
 .header__hamburger-menu-btn:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 1200px) {
+  .header__container {
+    min-width: 0;
+    width: calc(100% - 60px);
+  }
 }
 
 @media screen and (min-width: 769px) {

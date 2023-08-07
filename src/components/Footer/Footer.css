@@ -1,5 +1,4 @@
 .footer {
-  width: 89vw;
   max-width: 1140px;
   display: flex;
   flex-direction: column;
@@ -82,6 +81,12 @@
   line-height: normal;
   margin: 0;
   padding: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .footer {
+    width: calc(100% - 60px);
+  }
 }
 
 @media screen and (max-width: 768px) {

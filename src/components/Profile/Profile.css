@@ -127,3 +127,34 @@
 .profile__signout-button:hover {
   opacity: 0.7;
 }
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding: 236px 0 269px;
+  }
+  .profile__title {
+    margin: 0 0 96px;
+  }
+  .profile__fields {
+    margin: 0 0 210px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile {
+    max-width: 260px;
+    padding: 70px 0 40px;
+  }
+  .profile__title {
+    margin: 0 0 80px;
+  }
+  .profile__fields {
+    margin: 0 0 379px;
+  }
+  .profile__edit-button {
+    font-size: 12px;
+  }
+  .profile__signout-button {
+    font-size: 12px;
+  }
+}

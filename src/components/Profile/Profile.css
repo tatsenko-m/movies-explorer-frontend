@@ -1,0 +1,129 @@
+.profile {
+  max-width: 410px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 74px 0 70px;
+}
+
+.profile__title {
+  font-family: "Inter", "Arial", sans-serif;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 0 123px;
+  padding: 0;
+}
+
+.profile__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 16px;
+}
+
+.profile__fields {
+  width: 100%;
+  margin: 0 0 220px;
+}
+
+.profile__field {
+  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  margin: 0 0 17px;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.profile__field:last-child {
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+}
+
+.profile__caption {
+  font-family: "Inter", "Arial", sans-serif;
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  flex-grow: 0;
+  margin-right: auto;
+}
+
+.profile__input {
+  background: inherit;
+  border: none;
+  font-family: "Inter", "Arial", sans-serif;
+  color: #fff;
+  text-align: right;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  flex-grow: 0;
+  margin-left: auto;
+}
+
+.profile__edit-button {
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  opacity: 1;
+  transition: opacity 1s;
+  margin: 0;
+  padding: 0;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.7;
+}
+
+.profile__signout-button {
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: #ee3465;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  opacity: 1;
+  transition: opacity 1s;
+  margin: 0;
+  padding: 0;
+}
+
+.profile__signout-button:hover {
+  opacity: 0.7;
+}

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 const Profile = () => {
+  const initialName = "Виталий";
+  const initialEmail = "pochta@yandex.ru";
+
   const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState(initialName);
+  const [email, setEmail] = useState(initialEmail);
 
   const handleEditClick = (evt) => {
     evt.preventDefault();
@@ -12,6 +17,9 @@ const Profile = () => {
     evt.preventDefault();
     setIsEditing(false);
   };
+
+  const isNameValid = document.getElementById("name")?.validity.valid;
+  const isEmailValid = document.getElementById("email")?.validity.valid;
 
   return (
     <section className="profile">
@@ -26,14 +34,20 @@ const Profile = () => {
                 name="name"
                 className="profile__input"
                 type="text"
-                value="Виталий"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 minLength="2"
                 maxLength="40"
               />
             ) : (
-              <p className="profile__input">Виталий</p>
+              <p className="profile__input">{name}</p>
             )}
           </label>
+          {isEditing && !isNameValid && (
+            <span className="profile__input-error">
+              {document.getElementById("name")?.validationMessage}
+            </span>
+          )}
           <label className="profile__field">
             <span className="profile__caption">E-mail</span>
             {isEditing ? (
@@ -42,17 +56,28 @@ const Profile = () => {
                 name="email"
                 className="profile__input"
                 type="email"
-                value="pochta@yandex.ru"
-                minLength="2"
-                maxLength="40"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             ) : (
-              <p className="profile__input">pochta@yandex.ru</p>
+              <p className="profile__input">{email}</p>
             )}
           </label>
+          {isEditing && !isEmailValid && (
+            <span className="profile__input-error">
+              {document.getElementById("email")?.validationMessage}
+            </span>
+          )}
         </div>
         {isEditing ? (
-          <button className="profile__save-button" type="submit" onClick={handleSaveClick}>
+          <button
+            className={`profile__save-button ${
+              (!isNameValid || !isEmailValid) && "profile__save-button_disabled"
+            }`}
+            type="submit"
+            onClick={handleSaveClick}
+            disabled={!isNameValid || !isEmailValid}
+          >
             Сохранить
           </button>
         ) : (

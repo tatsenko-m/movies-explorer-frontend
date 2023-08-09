@@ -60,3 +60,26 @@
 .profile__edit-button:hover {
   opacity: 0.7;
 }
+
+@media screen and (max-width: 768px) {
+  .not-found-page {
+    padding: 408px 0 222px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .not-found-page {
+    padding: 329px 0 30px;
+  }
+  .not-found-page__heading {
+    font-size: 80px;
+    margin: 0 0 10px;
+  }
+  .not-found-page__caption {
+    font-size: 12px;
+    margin: 0 0 284px;
+  }
+  .not-found-page__back-button {
+    font-size: 12px;
+  }
+}

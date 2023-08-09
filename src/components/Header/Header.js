@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
-import headerLogo from '../../images/header-logo.svg';
 
 const Header = ({ loggedIn, onOpenMenu }) => {
   const location = useLocation();
@@ -14,13 +14,7 @@ const Header = ({ loggedIn, onOpenMenu }) => {
       {isHeaderVisible && (
         <header className={`header${location.pathname === '/' ? ' header_landing' : ''}`}>
           <div className="header__container">
-            <Link to="/" className="header__logo-link">
-              <img
-                className="header__logo"
-                src={headerLogo}
-                alt="Логотип учебного проекта"
-              />
-            </Link>
+            <Logo />
             <Navigation loggedIn={loggedIn} />
             {loggedIn && (
               <button className="header__hamburger-menu-btn" type="button" onClick={onOpenMenu}></button>

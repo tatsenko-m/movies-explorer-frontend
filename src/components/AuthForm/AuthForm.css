@@ -1,0 +1,91 @@
+.auth__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__heading {
+  color: #fff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 40px 0;
+  padding: 0;
+}
+
+.auth__fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 6px;
+  margin: 0 0 100px;
+  padding: 0;
+}
+
+.auth__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__caption {
+  display: block;
+  color: #8b8b8b;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 5px;
+}
+
+.auth__input {
+  background: inherit;
+  outline: none;
+  color: #fff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding: 0 0 10px;
+  border: 0;
+  border-bottom: 1px solid #424242;
+}
+
+.auth__input-error {
+  display: block;
+  max-width: 100%;
+  min-height: 12px;
+  color: #ee3465;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.auth__error {
+  display: block;
+  width: 100%;
+  min-height: 14px;
+  color: #ff004c;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 0 20px;
+}

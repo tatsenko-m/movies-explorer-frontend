@@ -78,6 +78,33 @@
   margin: 0;
   flex-grow: 0;
   margin-left: auto;
+  padding: 0;
+}
+
+.profile__save-button {
+  width: 100%;
+  border: 0;
+  background: #4285f4;
+  font-family: "Inter", "Arial", sans-serif;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  outline: none;
+  margin: 0;
+  padding: 13px 0 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.profile__save-button:hover {
+  opacity: 0.8;
 }
 
 .profile__edit-button {

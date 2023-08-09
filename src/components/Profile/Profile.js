@@ -38,16 +38,15 @@ const Profile = () => {
                 onChange={(e) => setName(e.target.value)}
                 minLength="2"
                 maxLength="40"
+                required
               />
             ) : (
               <p className="profile__input">{name}</p>
             )}
           </label>
-          {isEditing && !isNameValid && (
-            <span className="profile__input-error">
-              {document.getElementById("name")?.validationMessage}
-            </span>
-          )}
+          <span className="profile__input-error">
+            {document.getElementById("name")?.validationMessage}
+          </span>
           <label className="profile__field">
             <span className="profile__caption">E-mail</span>
             {isEditing ? (
@@ -58,16 +57,15 @@ const Profile = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             ) : (
               <p className="profile__input">{email}</p>
             )}
           </label>
-          {isEditing && !isEmailValid && (
-            <span className="profile__input-error">
-              {document.getElementById("email")?.validationMessage}
-            </span>
-          )}
+          <span className="profile__input-error">
+            {document.getElementById("email")?.validationMessage}
+          </span>
         </div>
         {isEditing ? (
           <button

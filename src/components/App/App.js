@@ -11,6 +11,7 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/profile" element={isLoading ? <Preloader /> : <Profile />} />
           <Route path="/signup" element={isLoading ? <Preloader /> : <Register />} />
           <Route path="/signin" element={isLoading ? <Preloader /> : <Login />} />
+          <Route path="/404" element={isLoading ? <Preloader /> : <NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

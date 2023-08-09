@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const Profile = () => {
   const initialName = "Виталий";
@@ -8,6 +8,9 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(initialName);
   const [email, setEmail] = useState(initialEmail);
+
+  const nameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
 
   const handleEditClick = (evt) => {
     evt.preventDefault();
@@ -19,9 +22,6 @@ const Profile = () => {
     setIsEditing(false);
   };
 
-  const isNameValid = document.getElementById("name")?.validity.valid;
-  const isEmailValid = document.getElementById("email")?.validity.valid;
-
   return (
     <section className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
@@ -31,6 +31,7 @@ const Profile = () => {
             <span className="profile__caption">Имя</span>
             {isEditing ? (
               <input
+                ref={nameInputRef}
                 id="name"
                 name="name"
                 className="profile__input"
@@ -46,12 +47,13 @@ const Profile = () => {
             )}
           </label>
           <span className="profile__input-error">
-            {document.getElementById("name")?.validationMessage}
+            {nameInputRef.current?.validationMessage}
           </span>
           <label className="profile__field">
             <span className="profile__caption">E-mail</span>
             {isEditing ? (
               <input
+                ref={emailInputRef}
                 id="email"
                 name="email"
                 className="profile__input"
@@ -65,7 +67,7 @@ const Profile = () => {
             )}
           </label>
           <span className="profile__input-error">
-            {document.getElementById("email")?.validationMessage}
+            {emailInputRef.current?.validationMessage}
           </span>
         </div>
         <span className="profile__error">
@@ -74,11 +76,16 @@ const Profile = () => {
         {isEditing ? (
           <button
             className={`profile__save-button ${
-              (!isNameValid || !isEmailValid) && "profile__save-button_disabled"
+              (!nameInputRef.current?.validity.valid ||
+                !emailInputRef.current?.validity.valid) &&
+              "profile__save-button_disabled"
             }`}
             type="submit"
             onClick={handleSaveClick}
-            disabled={!isNameValid || !isEmailValid}
+            disabled={
+              !nameInputRef.current?.validity.valid ||
+              !emailInputRef.current?.validity.valid
+            }
           >
             Сохранить
           </button>

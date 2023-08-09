@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 
 const AuthForm = ({ type, heading, submitButtonText }) => {
-  const isError = true;
+  const isError = false;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +27,11 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
                 ref={nameInputRef}
                 id="name"
                 name="name"
-                className="auth__input"
+                className={`auth__input${
+                  nameInputRef.current?.validity.valid
+                    ? ""
+                    : " auth__input_invalid"
+                }${type === "register" ? " auth__input_focused" : ""}`}
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -47,7 +51,11 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             ref={emailInputRef}
             id="email"
             name="email"
-            className="auth__input"
+            className={`auth__input${
+              emailInputRef.current?.validity.valid
+                ? ""
+                : " auth__input_invalid"
+            }${type === "register" ? " auth__input_focused" : ""}`}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -63,7 +71,11 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             ref={passwordInputRef}
             id="password"
             name="password"
-            className="auth__input"
+            className={`auth__input${
+              passwordInputRef.current?.validity.valid
+                ? ""
+                : " auth__input_invalid"
+            }${type === "register" ? " auth__input_focused" : ""}`}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

@@ -31,7 +31,9 @@
 
 .profile__fields {
   width: 100%;
-  margin: 0 0 187px;
+  margin: 0 0 153px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .profile__field {
@@ -42,8 +44,6 @@
   margin: 0 0 2px;
   border-bottom: 1px solid #424242;
   padding-bottom: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .profile__field:last-of-type {
@@ -93,6 +93,22 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.profile__error {
+  display: block;
+  width: 100%;
+  min-height: 14px;
+  color: #ff004c;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 0 20px;
 }
 
 .profile__save-button {
@@ -183,7 +199,7 @@
     margin: 0 0 96px;
   }
   .profile__fields {
-    margin: 0 0 177px;
+    margin: 0 0 143px;
   }
 }
 
@@ -196,7 +212,7 @@
     margin: 0 0 80px;
   }
   .profile__fields {
-    margin: 0 0 346px;
+    margin: 0 0 312px;
   }
   .profile__edit-button {
     font-size: 12px;

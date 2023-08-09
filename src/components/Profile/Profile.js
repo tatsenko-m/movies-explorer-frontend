@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Profile = () => {
   const initialName = "Виталий";
   const initialEmail = "pochta@yandex.ru";
+  const isError = false;
 
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(initialName);
@@ -67,6 +68,9 @@ const Profile = () => {
             {document.getElementById("email")?.validationMessage}
           </span>
         </div>
+        <span className="profile__error">
+          {isError ? "При обновлении профиля произошла ошибка." : ""}
+        </span>
         {isEditing ? (
           <button
             className={`profile__save-button ${

@@ -6,3 +6,16 @@
   margin: 0 auto;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .register {
+    padding: 232px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .register {
+    max-width: 260px;
+    padding: 56px 0 30px;
+  }
+}

@@ -18,7 +18,11 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
     <form ref={formRef} className="auth__form">
       <Logo />
       <h2 className="auth__heading">{heading}</h2>
-      <div className="auth__fields">
+      <div
+        className={`auth__fields${
+          type === "login" ? " auth__fields_login" : ""
+        }`}
+      >
         {type === "register" && (
           <>
             <label className="auth__field">

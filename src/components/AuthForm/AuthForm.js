@@ -35,7 +35,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
                   nameInputRef.current?.validity.valid
                     ? ""
                     : " auth__input_invalid"
-                }${type === "register" ? " auth__input_focused" : ""}`}
+                }`}
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -60,7 +60,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
               emailInputRef.current?.validity.valid
                 ? ""
                 : " auth__input_invalid"
-            }${type === "register" ? " auth__input_focused" : ""}`}
+            }`}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -81,7 +81,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
               passwordInputRef.current?.validity.valid
                 ? ""
                 : " auth__input_invalid"
-            }${type === "register" ? " auth__input_focused" : ""}`}
+            }`}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

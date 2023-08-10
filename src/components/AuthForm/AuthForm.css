@@ -61,18 +61,15 @@
   padding: 0 0 10px;
   border: 0;
   border-bottom: 1px solid #424242;
-}
-
-.auth__input_invalid {
-  color: #ee3465;
-}
-
-.auth__input_focused {
   transition: border-color 0.3s;
 
   &:focus {
     border-color: #4285f4;
   }
+}
+
+.auth__input_invalid {
+  color: #ee3465;
 }
 
 .auth__input-error {

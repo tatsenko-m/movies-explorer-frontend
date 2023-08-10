@@ -4,7 +4,7 @@ import AccountLink from "../AccountLink/AccountLink";
 
 const HamburgerMenu = ({ isOpen, onClose }) => {
   return (
-    <div className={`hamburger-menu${isOpen ? ' hamburger-menu_opened' : ''}`}>
+    <div className={`hamburger-menu${isOpen ? " hamburger-menu_opened" : ""}`}>
       <div className="hamburger-menu__container">
         <div className="hamburger-menu__menu">
           <button
@@ -22,6 +22,7 @@ const HamburgerMenu = ({ isOpen, onClose }) => {
                       isActive ? "hamburger-menu__link_active" : ""
                     }`
                   }
+                  onClick={onClose}
                 >
                   Главная
                 </NavLink>
@@ -34,6 +35,7 @@ const HamburgerMenu = ({ isOpen, onClose }) => {
                       isActive ? "hamburger-menu__link_active" : ""
                     }`
                   }
+                  onClick={onClose}
                 >
                   Фильмы
                 </NavLink>
@@ -46,12 +48,13 @@ const HamburgerMenu = ({ isOpen, onClose }) => {
                       isActive ? "hamburger-menu__link_active" : ""
                     }`
                   }
+                  onClick={onClose}
                 >
                   Сохраненные фильмы
                 </NavLink>
               </li>
               <li className="hamburger-menu__item">
-                <AccountLink />
+                <AccountLink onCloseMenu={onClose} />
               </li>
             </ul>
           </nav>

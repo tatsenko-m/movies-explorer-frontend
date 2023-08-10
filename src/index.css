@@ -23,6 +23,7 @@
 @import url(./components/Profile/Profile.css);
 @import url(./components/Footer/Footer.css);
 @import url(./components/NotFoundPage/NotFoundPage.css);
+@import url(./components/HamburgerMenu/HamburgerMenu.css);
 
 body {
   background-color: #202020;

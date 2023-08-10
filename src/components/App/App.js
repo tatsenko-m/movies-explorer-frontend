@@ -12,6 +12,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -32,6 +33,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <HamburgerMenu />
     </>
   );
 }

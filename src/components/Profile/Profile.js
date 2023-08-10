@@ -41,6 +41,7 @@ const Profile = () => {
                 minLength="2"
                 maxLength="40"
                 required
+                placeholder="Имя"
               />
             ) : (
               <p className="profile__input">{name}</p>
@@ -61,6 +62,7 @@ const Profile = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                placeholder="user@example.com"
               />
             ) : (
               <p className="profile__input">{email}</p>

@@ -42,6 +42,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
                 minLength="2"
                 maxLength="40"
                 required
+                placeholder="Имя"
               />
             </label>
             <span className="auth__input-error">
@@ -64,6 +65,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="user@example.com"
           />
         </label>
         <span className="auth__input-error">
@@ -84,6 +86,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
           />
         </label>
         <span className="auth__input-error">

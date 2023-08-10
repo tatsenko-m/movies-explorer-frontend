@@ -32,13 +32,13 @@ function App() {
       <Header loggedIn={loggedIn} onOpenMenu={handleHamburgerIconClick} />
       <main>
         <Routes>
-          <Route path="/" element={isLoading ? <Preloader /> : <Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/movies" element={isLoading ? <Preloader /> : <Movies />} />
           <Route path="/saved-movies" element={isLoading ? <Preloader /> : <SavedMovies />} />
           <Route path="/profile" element={isLoading ? <Preloader /> : <Profile />} />
           <Route path="/signup" element={isLoading ? <Preloader /> : <Register />} />
           <Route path="/signin" element={isLoading ? <Preloader /> : <Login />} />
-          <Route path="/404" element={isLoading ? <Preloader /> : <NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

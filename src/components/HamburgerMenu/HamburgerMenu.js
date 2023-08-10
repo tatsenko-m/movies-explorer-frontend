@@ -2,14 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import AccountLink from "../AccountLink/AccountLink";
 
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ isOpen, onClose }) => {
   return (
-    <div className="hamburger-menu">
+    <div className={`hamburger-menu${isOpen ? ' hamburger-menu_opened' : ''}`}>
       <div className="hamburger-menu__container">
         <div className="hamburger-menu__menu">
           <button
             className="hamburger-menu__close-button"
             type="button"
+            onClick={onClose}
           ></button>
           <nav>
             <ul className="hamburger-menu__links">

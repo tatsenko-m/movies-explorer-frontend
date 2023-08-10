@@ -1,0 +1,15 @@
+.form-error {
+  display: block;
+  width: 100%;
+  min-height: 14px;
+  color: #ff004c;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 0 20px;
+}

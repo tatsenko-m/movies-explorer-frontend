@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import FormError from "../FormError/FormError";
 
 const AuthForm = ({ type, heading, submitButtonText }) => {
   const isError = false;
@@ -93,7 +94,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
           {passwordInputRef.current?.validationMessage}
         </span>
       </div>
-      <span className="auth__error">{isError ? "Ошибка." : ""}</span>
+      <FormError isError={isError} errorMessage="Ошибка." />
       <button
         className={`auth__submit-button ${
           !formRef.current?.checkValidity() && "auth__submit-button_disabled"

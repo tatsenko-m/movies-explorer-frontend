@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import FormError from "../FormError/FormError";
 
 const Profile = () => {
   const initialName = "Виталий";
@@ -72,9 +73,7 @@ const Profile = () => {
             {emailInputRef.current?.validationMessage}
           </span>
         </div>
-        <span className="profile__error">
-          {isError ? "При обновлении профиля произошла ошибка." : ""}
-        </span>
+        <FormError isError={isError} errorMessage="При обновлении профиля произошла ошибка." />
         {isEditing ? (
           <button
             className={`profile__save-button ${

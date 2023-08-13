@@ -1,0 +1,74 @@
+.filter {
+  display: flex;
+  column-gap: 14px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filter__label {
+  position: relative;
+  width: 36px;
+  height: 20px;
+}
+
+.filter__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.filter__slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 20px;
+  background-color: #343434;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter__slider::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #a0a0a0;
+  border-radius: 4px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.filter__checkbox:checked + .filter__slider {
+  background-color: #2be080;
+}
+
+.filter__checkbox:checked + .filter__slider::before {
+  transform: translateX(16px);
+  background-color: #ffffff;
+}
+
+.filter__caption {
+  font-family: "Inter", "Arial", sans-serif;
+  color: #ffffff;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .filter {
+    column-gap: 13px;
+  }
+  .filter__caption {
+    font-size: 11px;
+  }
+}

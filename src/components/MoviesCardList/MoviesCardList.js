@@ -1,15 +1,29 @@
 import React from "react";
+import MoviesCard from "../MoviesCard/MoviesCard";
 
 const MoviesCardList = ({
   isSavedMovies,
   isMoreButtonVisible,
   isNotFoundMovies,
   isMoviesError,
-  children,
+  onMovieClick,
+  onMovieSave,
+  movies,
 }) => {
   const moviesCardsClassName = `movies-cards ${
     isSavedMovies && "movies-cards_saved"
   }`;
+
+  const moviesElements = movies.map((movie) => (
+    <MoviesCard
+      movie={movie}
+      key={movie.id}
+      isSavedMovies={isSavedMovies}
+      isSaved={false}
+      onMovieClick={onMovieClick}
+      onMovieSave={onMovieSave}
+    />
+  ));
 
   return (
     <section className={moviesCardsClassName}>
@@ -22,7 +36,7 @@ const MoviesCardList = ({
         </p>
       ) : (
         <>
-          <ul className="movies-cards__list">{children}</ul>
+          <ul className="movies-cards__list">{moviesElements}</ul>
           {isMoreButtonVisible && (
             <button className="movies-cards__more-button">Ещё</button>
           )}

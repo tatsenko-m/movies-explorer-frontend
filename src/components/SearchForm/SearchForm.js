@@ -2,15 +2,13 @@ import React from "react";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-const SearchForm = ({
-  isShortMovies,
-  onShortMoviesCheck,
-  onSearchMovies,
-}) => {
+const SearchForm = ({ isShortMovies, onShortMoviesCheck, onSearchMovies }) => {
   const [searchFormInput, setSearchFormInput] = React.useState(() => {
     const storedValue = localStorage.getItem("searchFormInput");
     return storedValue ? storedValue : "";
   });
+
+  const [inputError, setInputError] = React.useState(false);
 
   React.useEffect(() => {
     localStorage.setItem("searchFormInput", searchFormInput);
@@ -22,7 +20,12 @@ const SearchForm = ({
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onSearchMovies(searchFormInput);
+    if (searchFormInput.trim() !== "") {
+      setInputError(false);
+      onSearchMovies(searchFormInput);
+    } else {
+      setInputError(true);
+    }
   }
 
   React.useEffect(() => {
@@ -39,13 +42,16 @@ const SearchForm = ({
             className="search__form-input"
             type="text"
             placeholder="Фильм"
-            value={searchFormInput || ''}
+            value={searchFormInput || ""}
             onChange={handleInputChange}
           />
           <button className="search__form-button" type="submit">
             Поиск
           </button>
         </div>
+        <span className="search__error">
+          {inputError && "Нужно ввести ключевое слово"}
+        </span>
         <FilterCheckbox
           isShortMovies={isShortMovies}
           onShortMoviesCheck={onShortMoviesCheck}

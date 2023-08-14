@@ -14,13 +14,14 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  row-gap: 26px;
+  /* row-gap: 26px; */
   align-items: flex-start;
 }
 
 .search__search-bar {
   width: 100%;
   position: relative;
+  margin-bottom: 6px;
 }
 
 .search__form-input {
@@ -77,6 +78,19 @@
   opacity: 0.8;
 }
 
+.search__error {
+  display: block;
+  max-width: 100%;
+  min-height: 12px;
+  color: #ee3465;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 8px;
+}
+
 @media screen and (max-width: 1200px) {
   .search {
     width: calc(100% - 60px);
@@ -110,5 +124,8 @@
     top: 6px;
     bottom: 6px;
     padding: 13px 0;
+  }
+  .search__error {
+    margin-bottom: 12px;
   }
 }

@@ -20,7 +20,7 @@ const SearchForm = ({
   }
 
   React.useEffect(() => {
-    if (movies.length > 0 && searchFormInput.trim() !== "") {
+    if (searchFormInput.trim() !== "") {
       onSearchMovies(searchFormInput);
     }
   }, [isShortMovies]);

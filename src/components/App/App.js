@@ -13,11 +13,17 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import moviesApi from "../../utils/MoviesApi";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
+  const [movies, setMovies] = React.useState([]);
+  const [apiMovies, setApiMovies] = React.useState([]);
+  const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
+  const [isMoviesError, setIsMoviesError] = React.useState(false);
+  const [isShortMovies, setIsShortMovies] = React.useState(false);
 
   function handleHamburgerIconClick() {
     setIsHamburgerMenuOpen(true);
@@ -27,22 +33,112 @@ function App() {
     setIsHamburgerMenuOpen(false);
   }
 
+  function handleShortMoviesCheck(evt) {
+    setIsShortMovies(evt.target.checked);
+  }
+
+  function handleSearchQuery(movies, searchQuery) {
+    const isCyrillic = /[а-яА-ЯЁё]/.test(searchQuery);
+
+    const searchPattern = new RegExp(searchQuery, "i");
+
+    const filterMovies = (movie) => {
+      const searchField = isCyrillic ? "nameRU" : "nameEN";
+      const name = movie[searchField];
+
+      if (isShortMovies) {
+        return searchPattern.test(name) && movie.duration <= 40;
+      } else {
+        return searchPattern.test(name);
+      }
+    };
+
+    return movies.filter(filterMovies);
+  }
+
+  function searchMovies(searchQuery) {
+    setIsLoading(true);
+    setMovies([]);
+    setIsNotFoundMovies(false);
+
+    if (apiMovies.length === 0) {
+      moviesApi
+        .getMovies()
+        .then((movies) => {
+          setApiMovies(movies);
+          const result = handleSearchQuery(movies, searchQuery);
+          if (result.length === 0) {
+            setIsNotFoundMovies(true);
+            setMovies([]);
+          } else {
+            localStorage.setItem("movies", JSON.stringify(result));
+            setMovies(JSON.parse(localStorage.getItem("movies")));
+          }
+        })
+        .catch(() => {
+          setIsMoviesError(true);
+          setMovies([]);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      const result = handleSearchQuery(apiMovies, searchQuery);
+      if (result.length === 0) {
+        setIsNotFoundMovies(true);
+        setMovies([]);
+        setIsLoading(false);
+      } else {
+        localStorage.setItem("movies", JSON.stringify(result));
+        setMovies(JSON.parse(localStorage.getItem("movies")));
+        setIsLoading(false);
+      }
+    }
+  }
+
   return (
     <>
       <Header loggedIn={loggedIn} onOpenMenu={handleHamburgerIconClick} />
       <main>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/movies" element={isLoading ? <Preloader /> : <Movies />} />
-          <Route path="/saved-movies" element={isLoading ? <Preloader /> : <SavedMovies />} />
-          <Route path="/profile" element={isLoading ? <Preloader /> : <Profile />} />
-          <Route path="/signup" element={isLoading ? <Preloader /> : <Register />} />
-          <Route path="/signin" element={isLoading ? <Preloader /> : <Login />} />
+          <Route
+            path="/movies"
+            element={
+              isLoading ? (
+                <Preloader />
+              ) : (
+                <Movies
+                  isShortMovies={isShortMovies}
+                  onShortMoviesCheck={handleShortMoviesCheck}
+                />
+              )
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={isLoading ? <Preloader /> : <SavedMovies />}
+          />
+          <Route
+            path="/profile"
+            element={isLoading ? <Preloader /> : <Profile />}
+          />
+          <Route
+            path="/signup"
+            element={isLoading ? <Preloader /> : <Register />}
+          />
+          <Route
+            path="/signin"
+            element={isLoading ? <Preloader /> : <Login />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />
-      <HamburgerMenu isOpen={isHamburgerMenuOpen} onClose={closeHamburgerMenu} />
+      <HamburgerMenu
+        isOpen={isHamburgerMenuOpen}
+        onClose={closeHamburgerMenu}
+      />
     </>
   );
 }

@@ -8,19 +8,12 @@ const SearchForm = ({ isShortMovies, onShortMoviesCheck, onSearchMovies }) => {
     return storedValue ? storedValue : "";
   });
 
-  const [prevSearchFormInput, setPrevSearchFormInput] = React.useState("");
-
   const [inputError, setInputError] = React.useState(false);
-
-  React.useEffect(() => {
-    const storedValue = localStorage.getItem("searchFormInput");
-    if (storedValue) {
-      setSearchFormInput(storedValue);
-    }
-  }, []);
+  const [inputChanged, setInputChanged] = React.useState(false);
 
   function handleInputChange(evt) {
     setSearchFormInput(evt.target.value);
+    setInputChanged(true);
   }
 
   function handleSubmit(evt) {
@@ -29,18 +22,17 @@ const SearchForm = ({ isShortMovies, onShortMoviesCheck, onSearchMovies }) => {
       setInputError(false);
       onSearchMovies(searchFormInput);
       localStorage.setItem("searchFormInput", searchFormInput);
-      setPrevSearchFormInput(searchFormInput);
+      setInputChanged(false);
     } else {
       setInputError(true);
     }
   }
 
   React.useEffect(() => {
-    if (
-      searchFormInput.trim() !== "" &&
-      searchFormInput === prevSearchFormInput
-    ) {
-      onSearchMovies(searchFormInput);
+    const storedValue = localStorage.getItem("searchFormInput");
+    if (!inputChanged && storedValue) {
+      setSearchFormInput(storedValue);
+      onSearchMovies(storedValue);
     }
   }, [isShortMovies]);
 

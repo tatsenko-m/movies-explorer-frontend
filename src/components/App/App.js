@@ -71,6 +71,7 @@ function App() {
           const result = handleSearchQuery(movies, searchQuery);
           if (result.length === 0) {
             setIsNotFoundMovies(true);
+            localStorage.removeItem("movies");
             setMovies([]);
           } else {
             localStorage.setItem("movies", JSON.stringify(result));
@@ -88,6 +89,7 @@ function App() {
       const result = handleSearchQuery(apiMovies, searchQuery);
       if (result.length === 0) {
         setIsNotFoundMovies(true);
+        localStorage.removeItem("movies");
         setMovies([]);
         setIsLoading(false);
       } else {

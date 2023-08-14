@@ -10,7 +10,7 @@ const Movies = ({ isLoading, isShortMovies, onShortMoviesCheck, onSearchMovies, 
 
   return (
     <>
-      <SearchForm isShortMovies={isShortMovies} onShortMoviesCheck={onShortMoviesCheck} onSearchMovies={onSearchMovies} movies={movies}  />
+      <SearchForm isShortMovies={isShortMovies} onShortMoviesCheck={onShortMoviesCheck} onSearchMovies={onSearchMovies} />
       {isLoading ? (
         <Preloader />
       ) : (

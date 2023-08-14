@@ -1,29 +1,39 @@
-import React from 'react';
+import React from "react";
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 
-const Movies = () => {
+const Movies = ({ isLoading, isShortMovies, onShortMoviesCheck, onSearchMovies, isNotFoundMovies, isMoviesError, movies }) => {
   const isSavedMovies = false;
 
   return (
     <>
-      <SearchForm />
-      <MoviesCardList isSavedMovies={isSavedMovies} isMoreButtonVisible={true}>
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-      </MoviesCardList>
+      <SearchForm isShortMovies={isShortMovies} onShortMoviesCheck={onShortMoviesCheck} onSearchMovies={onSearchMovies}  />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isSavedMovies={isSavedMovies}
+          isMoreButtonVisible={true}
+          isNotFoundMovies={isNotFoundMovies}
+          isMoviesError={isMoviesError}
+        >
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+          <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
+        </MoviesCardList>
+      )}
     </>
   );
 };

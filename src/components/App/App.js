@@ -56,7 +56,7 @@ function App() {
     return movies.filter(filterMovies);
   }
 
-  function searchMovies(searchQuery) {
+  function handleSearchMovies(searchQuery) {
     setIsLoading(true);
     setMovies([]);
     setIsNotFoundMovies(false);
@@ -105,14 +105,15 @@ function App() {
           <Route
             path="/movies"
             element={
-              isLoading ? (
-                <Preloader />
-              ) : (
-                <Movies
-                  isShortMovies={isShortMovies}
-                  onShortMoviesCheck={handleShortMoviesCheck}
-                />
-              )
+              <Movies
+                isLoading={isLoading}
+                isShortMovies={isShortMovies}
+                onShortMoviesCheck={handleShortMoviesCheck}
+                onSearchMovies={handleSearchMovies}
+                isNotFoundMovies={isNotFoundMovies}
+                isMoviesError={isMoviesError}
+                movies={movies}
+              />
             }
           />
           <Route

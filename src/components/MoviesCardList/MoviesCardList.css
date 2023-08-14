@@ -10,6 +10,18 @@
   padding-bottom: 180px;
 }
 
+.movies-cards__message {
+  color: #fff;
+  text-align: center;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
 .movies-cards__list {
   width: 100%;
   display: grid;

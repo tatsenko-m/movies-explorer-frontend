@@ -6,9 +6,15 @@ const SearchForm = ({
   isShortMovies,
   onShortMoviesCheck,
   onSearchMovies,
-  movies,
 }) => {
-  const [searchFormInput, setSearchFormInput] = React.useState("");
+  const [searchFormInput, setSearchFormInput] = React.useState(() => {
+    const storedValue = localStorage.getItem("searchFormInput");
+    return storedValue ? storedValue : "";
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem("searchFormInput", searchFormInput);
+  }, [searchFormInput]);
 
   function handleInputChange(evt) {
     setSearchFormInput(evt.target.value);
@@ -33,6 +39,7 @@ const SearchForm = ({
             className="search__form-input"
             type="text"
             placeholder="Фильм"
+            value={searchFormInput || ''}
             onChange={handleInputChange}
           />
           <button className="search__form-button" type="submit">

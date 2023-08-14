@@ -19,11 +19,13 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
-  const [movies, setMovies] = React.useState([]);
+  const initialMovies = JSON.parse(localStorage.getItem("movies")) || [];
+  const [movies, setMovies] = React.useState(initialMovies);
   const [apiMovies, setApiMovies] = React.useState([]);
   const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
   const [isMoviesError, setIsMoviesError] = React.useState(false);
-  const [isShortMovies, setIsShortMovies] = React.useState(false);
+  const initialIsShortMovies = JSON.parse(localStorage.getItem("isShortMovies")) || false;
+  const [isShortMovies, setIsShortMovies] = React.useState(initialIsShortMovies);
 
   function handleHamburgerIconClick() {
     setIsHamburgerMenuOpen(true);
@@ -95,6 +97,10 @@ function App() {
       }
     }
   }
+
+  React.useEffect(() => {
+    localStorage.setItem("isShortMovies", JSON.stringify(isShortMovies));
+  }, [isShortMovies]);
 
   return (
     <>

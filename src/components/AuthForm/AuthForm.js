@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import FormError from "../FormError/FormError";
 
-const AuthForm = ({ type, heading, submitButtonText, onRegister, onLogin }) => {
-  const isError = false;
-
+const AuthForm = ({
+  type,
+  heading,
+  submitButtonText,
+  isAuthError,
+  authErrorMessage,
+  onRegister,
+  onLogin,
+}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -122,7 +128,7 @@ const AuthForm = ({ type, heading, submitButtonText, onRegister, onLogin }) => {
           {passwordInputRef.current?.validationMessage}
         </span>
       </div>
-      <FormError isError={isError} errorMessage="Ошибка." />
+      <FormError isError={isAuthError} errorMessage={authErrorMessage} />
       <button
         className={`auth__submit-button ${
           !formRef.current?.checkValidity() && "auth__submit-button_disabled"

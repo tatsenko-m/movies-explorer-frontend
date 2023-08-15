@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 
 import Preloader from "../Preloader/Preloader";
@@ -14,6 +14,7 @@ import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import moviesApi from "../../utils/MoviesApi";
+import * as mainApi from "../../utils/MainApi";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
@@ -24,8 +25,14 @@ function App() {
   const [apiMovies, setApiMovies] = React.useState([]);
   const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
   const [isMoviesError, setIsMoviesError] = React.useState(false);
-  const initialIsShortMovies = JSON.parse(localStorage.getItem("isShortMovies")) || false;
-  const [isShortMovies, setIsShortMovies] = React.useState(initialIsShortMovies);
+  const initialIsShortMovies =
+    JSON.parse(localStorage.getItem("isShortMovies")) || false;
+  const [isShortMovies, setIsShortMovies] =
+    React.useState(initialIsShortMovies);
+  const [isAuthError, setIsAuthError] = React.useState(false);
+  const [authErrorMessage, setAuthErrorMessage] = React.useState("");
+
+  const navigate = useNavigate();
 
   function handleHamburgerIconClick() {
     setIsHamburgerMenuOpen(true);
@@ -100,6 +107,31 @@ function App() {
     }
   }
 
+  function handleRegister(name, email, password) {
+    setIsAuthError(false);
+    setAuthErrorMessage("");
+    setIsLoading(true);
+
+    mainApi
+      .register(name, email, password)
+      .then(() => {
+        navigate("/movies");
+      })
+      .catch((err) => {
+        setIsAuthError(true);
+        if (err.status === 409) {
+          setAuthErrorMessage("Пользователь с таким email уже существует.");
+        } else {
+          setAuthErrorMessage(
+            err.message || "При регистрации пользователя произошла ошибка."
+          );
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   React.useEffect(() => {
     localStorage.setItem("isShortMovies", JSON.stringify(isShortMovies));
   }, [isShortMovies]);
@@ -134,7 +166,17 @@ function App() {
           />
           <Route
             path="/signup"
-            element={isLoading ? <Preloader /> : <Register />}
+            element={
+              isLoading ? (
+                <Preloader />
+              ) : (
+                <Register
+                  isAuthError={isAuthError}
+                  authErrorMessage={authErrorMessage}
+                  onRegister={handleRegister}
+                />
+              )
+            }
           />
           <Route
             path="/signin"

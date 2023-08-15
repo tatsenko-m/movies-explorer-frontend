@@ -51,6 +51,7 @@
   min-height: 168px;
   object-fit: cover;
   object-position: center center;
+  cursor: pointer;
 }
 
 .movies-card__footer {

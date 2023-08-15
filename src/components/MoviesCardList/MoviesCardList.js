@@ -5,7 +5,6 @@ const MoviesCardList = ({
   isSavedMovies,
   isNotFoundMovies,
   isMoviesError,
-  onMovieClick,
   onMovieSave,
   movies,
 }) => {
@@ -79,7 +78,6 @@ const MoviesCardList = ({
         key={movie.id}
         isSavedMovies={isSavedMovies}
         isSaved={false}
-        onMovieClick={onMovieClick}
         onMovieSave={onMovieSave}
       />
     ));

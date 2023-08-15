@@ -11,7 +11,6 @@ const Movies = ({
   onSearchMovies,
   isNotFoundMovies,
   isMoviesError,
-  onMovieClick,
   onMovieSave,
   movies,
 }) => {
@@ -32,7 +31,6 @@ const Movies = ({
           isMoreButtonVisible={true}
           isNotFoundMovies={isNotFoundMovies}
           isMoviesError={isMoviesError}
-          onMovieClick={onMovieClick}
           onMovieSave={onMovieSave}
           movies={movies}
         ></MoviesCardList>

@@ -11,6 +11,12 @@ const MoviesCard = ({ movie, isSavedMovies, isSaved }) => {
     setIsSavedState(!isSavedState);
   }
 
+  function handleImageClick() {
+    if (movie.trailerLink) {
+      window.open(movie.trailerLink, "_blank");
+    }
+  }
+
   const declOfMinutes = (number) => {
     const cases = [2, 0, 1, 1, 1, 2];
     const titles = ["минута", "минуты", "минут"];
@@ -45,6 +51,7 @@ const MoviesCard = ({ movie, isSavedMovies, isSaved }) => {
         className="movies-card__image"
         src={`https://api.nomoreparties.co${movie.image.url}`}
         alt={`Постер фильма ${movie.nameRU}`}
+        onClick={handleImageClick}
       />
       <div className="movies-card__footer">
         {isSavedMovies ? (

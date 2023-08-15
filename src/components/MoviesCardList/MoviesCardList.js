@@ -11,7 +11,7 @@ const MoviesCardList = ({
 }) => {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
-  const calculateVisibleMoviesCount = () => {
+  const calculateVisibleMoviesCount = React.useCallback(() => {
     if (windowWidth >= 1280) {
       return 12;
     } else if (windowWidth >= 768) {
@@ -19,7 +19,7 @@ const MoviesCardList = ({
     } else {
       return 5;
     }
-  };
+  }, [windowWidth]);
 
   const [visibleMoviesCount, setVisibleMoviesCount] = React.useState(
     calculateVisibleMoviesCount()
@@ -27,10 +27,17 @@ const MoviesCardList = ({
 
   React.useEffect(() => {
     setVisibleMoviesCount(calculateVisibleMoviesCount());
-  }, [movies, windowWidth]);
+  }, [movies, windowWidth, calculateVisibleMoviesCount]);
 
   React.useEffect(() => {
-    const handleResize = () => {
+    let resizeTimeout;
+
+    const handleResizeWithTimeout = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        calculateCount();
+      }, 300);
+
       setWindowWidth(window.innerWidth);
     };
 
@@ -39,11 +46,11 @@ const MoviesCardList = ({
     };
 
     calculateCount();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResizeWithTimeout);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResizeWithTimeout);
     };
-  }, []);
+  }, [calculateVisibleMoviesCount]);
 
   const handleShowMore = () => {
     const additionalMoviesCount = getAdditionalMoviesCount();

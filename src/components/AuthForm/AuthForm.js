@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import FormError from "../FormError/FormError";
 
-const AuthForm = ({ type, heading, submitButtonText }) => {
+const AuthForm = ({ type, heading, submitButtonText, onRegister, onLogin }) => {
   const isError = false;
 
   const [name, setName] = useState("");
@@ -20,20 +20,31 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
     return namePattern.test(value);
   };
 
-  const handleNameChange = (e) => {
-    const inputValue = e.target.value;
+  const handleNameChange = (evt) => {
+    const inputValue = evt.target.value;
     setName(inputValue);
     if (!isNameValid(inputValue)) {
-      e.target.setCustomValidity(
+      evt.target.setCustomValidity(
         "Используйте только латиницу, кириллицу, пробел или дефис"
       );
     } else {
-      e.target.setCustomValidity("");
+      evt.target.setCustomValidity("");
     }
   };
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (type === "register") {
+      onRegister(name, email, password);
+    } else if (type === "login") {
+      onLogin(email, password);
+    } else {
+      return;
+    }
+  }
+
   return (
-    <form ref={formRef} className="auth__form">
+    <form ref={formRef} className="auth__form" onSubmit={handleSubmit}>
       <Logo />
       <h2 className="auth__heading">{heading}</h2>
       <div
@@ -81,7 +92,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             }`}
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(evt) => setEmail(evt.target.value)}
             required
             placeholder="user@example.com"
           />
@@ -102,7 +113,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             }`}
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(evt) => setPassword(evt.target.value)}
             required
             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
           />

@@ -18,15 +18,15 @@ const Profile = () => {
     return namePattern.test(value);
   };
 
-  const handleNameChange = (e) => {
-    const inputValue = e.target.value;
+  const handleNameChange = (evt) => {
+    const inputValue = evt.target.value;
     setName(inputValue);
     if (!isNameValid(inputValue)) {
-      e.target.setCustomValidity(
+      evt.target.setCustomValidity(
         "Используйте только латиницу, кириллицу, пробел или дефис"
       );
     } else {
-      e.target.setCustomValidity("");
+      evt.target.setCustomValidity("");
     }
   };
 
@@ -78,7 +78,7 @@ const Profile = () => {
                 className="profile__input"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(evt) => setEmail(evt.target.value)}
                 required
                 placeholder="user@example.com"
               />

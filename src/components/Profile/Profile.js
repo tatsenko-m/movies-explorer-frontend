@@ -13,6 +13,23 @@ const Profile = () => {
   const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
 
+  const isNameValid = (value) => {
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
+    return namePattern.test(value);
+  };
+
+  const handleNameChange = (e) => {
+    const inputValue = e.target.value;
+    setName(inputValue);
+    if (!isNameValid(inputValue)) {
+      e.target.setCustomValidity(
+        "Используйте только латиницу, кириллицу, пробел или дефис"
+      );
+    } else {
+      e.target.setCustomValidity("");
+    }
+  };
+
   const handleEditClick = (evt) => {
     evt.preventDefault();
     setIsEditing(true);
@@ -38,7 +55,7 @@ const Profile = () => {
                 className="profile__input"
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
                 minLength="2"
                 maxLength="40"
                 required
@@ -73,7 +90,10 @@ const Profile = () => {
             {emailInputRef.current?.validationMessage}
           </span>
         </div>
-        <FormError isError={isError} errorMessage="При обновлении профиля произошла ошибка." />
+        <FormError
+          isError={isError}
+          errorMessage="При обновлении профиля произошла ошибка."
+        />
         {isEditing ? (
           <button
             className={`profile__save-button ${

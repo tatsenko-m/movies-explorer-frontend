@@ -15,6 +15,23 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
+  const isNameValid = (value) => {
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
+    return namePattern.test(value);
+  };
+
+  const handleNameChange = (e) => {
+    const inputValue = e.target.value;
+    setName(inputValue);
+    if (!isNameValid(inputValue)) {
+      e.target.setCustomValidity(
+        "Используйте только латиницу, кириллицу, пробел или дефис"
+      );
+    } else {
+      e.target.setCustomValidity("");
+    }
+  };
+
   return (
     <form ref={formRef} className="auth__form">
       <Logo />
@@ -39,7 +56,7 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
                 }`}
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
                 minLength="2"
                 maxLength="40"
                 required

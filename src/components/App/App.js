@@ -244,6 +244,18 @@ function App() {
     }
   }
 
+  function handleSaveMovie(movie) {
+    if (loggedIn) {
+      mainApi.setHeaders(createHeaders());
+      mainApi
+        .saveMovie(movie)
+        .then((res) => {
+          getSavedMovies();
+        })
+        .catch((err) => alert(err));
+    }
+  }
+
   React.useEffect(() => {
     handleTokenCheck();
   }, []);

@@ -220,6 +220,14 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  function handleSignOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("movies");
+    setCurrentUser({ name: "", email: "" });
+    setLoggedIn(false);
+    navigate("/");
+  }
+
   React.useEffect(() => {
     handleTokenCheck();
   }, []);
@@ -263,6 +271,7 @@ function App() {
                   updateUserErrorMessage={updateUserErrorMessage}
                   isUpdateUserSuccess={isUpdateUserSuccess}
                   onUpdateUser={handleUpdateUser}
+                  onSignOut={handleSignOut}
                 />
               )
             }

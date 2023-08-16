@@ -7,6 +7,7 @@ const Profile = ({
   updateUserErrorMessage,
   isUpdateUserSuccess,
   onUpdateUser,
+  onSignOut,
 }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -162,7 +163,11 @@ const Profile = ({
         )}
       </form>
       {!isEditing && (
-        <button className="profile__signout-button" type="button">
+        <button
+          className="profile__signout-button"
+          type="button"
+          onClick={onSignOut}
+        >
           Выйти из аккаунта
         </button>
       )}

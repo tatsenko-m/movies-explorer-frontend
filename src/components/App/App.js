@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 
 import Preloader from "../Preloader/Preloader";
@@ -32,9 +32,10 @@ function App() {
     React.useState(initialIsShortMovies);
   const [isAuthError, setIsAuthError] = React.useState(false);
   const [authErrorMessage, setAuthErrorMessage] = React.useState("");
-  const [userData, setUserData] = React.useState({ email: "" });
+  const [userData, setUserData] = React.useState({ name: "", email: "" });
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   function handleHamburgerIconClick() {
     setIsHamburgerMenuOpen(true);
@@ -135,24 +136,59 @@ function App() {
   }
 
   function handleLogin(email, password) {
+    setIsAuthError(false);
+    setAuthErrorMessage("");
     setIsLoading(true);
 
     mainApi
       .authorize(email, password)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          mainApi.setHeaders(createHeaders());
-          setLoggedIn(true);
-          setUserData({ email: email });
-          navigate("/movies");
+        if (!data.token) {
+          setIsAuthError(true);
+          setAuthErrorMessage(
+            "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
+          );
+          setIsLoading(false);
+          return;
         }
+
+        localStorage.setItem("token", data.token);
+        mainApi.setHeaders(createHeaders());
+        setLoggedIn(true);
+        navigate("/movies");
       })
       .catch((err) => {
-        console.log(err);
+        setIsAuthError(true);
+        if (err.status === 401) {
+          setAuthErrorMessage("Вы ввели неправильный логин или пароль.");
+        } else {
+          setAuthErrorMessage(
+            err.message || "При авторизации произошла ошибка."
+          );
+        }
       })
       .finally(() => setIsLoading(false));
   }
+
+  function handleTokenCheck() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      mainApi.setHeaders(createHeaders());
+      mainApi
+        .getUserInfo()
+        .then((user) => {
+          setLoggedIn(true);
+          setUserData({ name: user.name, email: user.email });
+          const url = location.state?.backUrl || "/movies";
+          navigate(url);
+        })
+        .catch((err) => alert(err));
+    }
+  }
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   React.useEffect(() => {
     localStorage.setItem("isShortMovies", JSON.stringify(isShortMovies));
@@ -202,7 +238,17 @@ function App() {
           />
           <Route
             path="/signin"
-            element={isLoading ? <Preloader /> : <Login />}
+            element={
+              isLoading ? (
+                <Preloader />
+              ) : (
+                <Login
+                  isAuthError={isAuthError}
+                  authErrorMessage={authErrorMessage}
+                  onLogin={handleLogin}
+                />
+              )
+            }
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

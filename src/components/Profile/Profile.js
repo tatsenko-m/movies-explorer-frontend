@@ -102,13 +102,16 @@ const Profile = () => {
         {isEditing ? (
           <button
             className={`profile__save-button ${
-              (!nameInputRef.current?.validity.valid ||
-                !emailInputRef.current?.validity.valid) &&
-              "profile__save-button_disabled"
+              (name === currentUser.name && email === currentUser.email) ||
+              !nameInputRef.current?.validity.valid ||
+              !emailInputRef.current?.validity.valid
+                ? "profile__save-button_disabled"
+                : ""
             }`}
             type="submit"
             onClick={handleSaveClick}
             disabled={
+              (name === currentUser.name && email === currentUser.email) ||
               !nameInputRef.current?.validity.valid ||
               !emailInputRef.current?.validity.valid
             }

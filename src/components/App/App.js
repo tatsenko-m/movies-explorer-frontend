@@ -35,6 +35,10 @@ function App() {
     React.useState(initialIsShortMovies);
   const [isAuthError, setIsAuthError] = React.useState(false);
   const [authErrorMessage, setAuthErrorMessage] = React.useState("");
+  const [isUpdateUserError, setIsUpdateUserError] = React.useState(false);
+  const [isUpdateUserSuccess, setIsUpdateUserSuccess] = React.useState(false);
+  const [updateUserErrorMessage, setUpdateUserErrorMessage] =
+    React.useState("");
   const [currentUser, setCurrentUser] = React.useState({ name: "", email: "" });
 
   const navigate = useNavigate();
@@ -191,6 +195,28 @@ function App() {
     }
   }
 
+  function handleUpdateUser(name, email) {
+    setIsLoading(true);
+
+    mainApi
+      .setUserInfo(name, email)
+      .then((updatedUser) => {
+        setCurrentUser({ name: updatedUser.name, email: updatedUser.email });
+        setIsUpdateUserSuccess(true);
+      })
+      .catch((err) => {
+        setIsUpdateUserError(true);
+        if (err.status === 409) {
+          setAuthErrorMessage("Пользователь с таким email уже существует.");
+        } else {
+          setAuthErrorMessage(
+            err.message || "При обновлении профиля произошла ошибка."
+          );
+        }
+      })
+      .finally(() => setIsLoading(false));
+  }
+
   React.useEffect(() => {
     handleTokenCheck();
   }, []);
@@ -225,7 +251,13 @@ function App() {
           />
           <Route
             path="/profile"
-            element={isLoading ? <Preloader /> : <Profile />}
+            element={
+              isLoading ? (
+                <Preloader />
+              ) : (
+                <Profile onUpdateUser={handleUpdateUser} />
+              )
+            }
           />
           <Route
             path="/signup"

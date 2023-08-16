@@ -32,13 +32,13 @@ class MainApi {
     });
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
-        about: about,
+        email: email,
       }),
     }).then((res) => {
       return this._handleResponse(res);

@@ -18,7 +18,7 @@ import { createHeaders } from "../../utils/headers";
 import mainApi from "../../utils/MainApi";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
   const initialMovies = JSON.parse(localStorage.getItem("movies")) || [];

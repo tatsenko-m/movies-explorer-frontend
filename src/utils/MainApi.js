@@ -45,8 +45,8 @@ class MainApi {
     });
   }
 
-  getCardList() {
-    return fetch(`${this._baseUrl}/cards`, {
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: this._headers,
     }).then((res) => {

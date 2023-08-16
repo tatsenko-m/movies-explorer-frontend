@@ -6,6 +6,8 @@ const MoviesCardList = ({
   isNotFoundMovies,
   isMoviesError,
   onMovieSave,
+  onGetSavedMovies,
+  savedMovies,
   movies,
 }) => {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
@@ -81,6 +83,10 @@ const MoviesCardList = ({
         onMovieSave={onMovieSave}
       />
     ));
+
+  React.useEffect(() => {
+    onGetSavedMovies();
+  }, []);
 
   return (
     <section className={moviesCardsClassName}>

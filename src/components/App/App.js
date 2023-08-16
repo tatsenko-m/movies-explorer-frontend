@@ -27,6 +27,7 @@ function App() {
   const initialMovies = JSON.parse(localStorage.getItem("movies")) || [];
   const [movies, setMovies] = React.useState(initialMovies);
   const [apiMovies, setApiMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
   const [isMoviesError, setIsMoviesError] = React.useState(false);
   const initialIsShortMovies =
@@ -228,6 +229,21 @@ function App() {
     navigate("/");
   }
 
+  function getSavedMovies() {
+    setIsLoading(true);
+
+    if (loggedIn) {
+      mainApi.setHeaders(createHeaders());
+      mainApi
+        .getSavedMovies()
+        .then((savedMovies) => {
+          setSavedMovies(savedMovies);
+        })
+        .catch((err) => alert(err))
+        .finally(() => setIsLoading(false));
+    }
+  }
+
   React.useEffect(() => {
     handleTokenCheck();
   }, []);
@@ -252,13 +268,24 @@ function App() {
                 onSearchMovies={handleSearchMovies}
                 isNotFoundMovies={isNotFoundMovies}
                 isMoviesError={isMoviesError}
+                onGetSavedMovies={getSavedMovies}
+                savedMovies={savedMovies}
                 movies={movies}
               />
             }
           />
           <Route
             path="/saved-movies"
-            element={isLoading ? <Preloader /> : <SavedMovies />}
+            element={
+              isLoading ? (
+                <Preloader />
+              ) : (
+                <SavedMovies
+                  onGetSavedMovies={getSavedMovies}
+                  savedMovies={savedMovies}
+                />
+              )
+            }
           />
           <Route
             path="/profile"

@@ -12,6 +12,8 @@ const Movies = ({
   isNotFoundMovies,
   isMoviesError,
   onMovieSave,
+  onGetSavedMovies, 
+  savedMovies,
   movies,
 }) => {
   const isSavedMovies = false;
@@ -32,6 +34,8 @@ const Movies = ({
           isNotFoundMovies={isNotFoundMovies}
           isMoviesError={isMoviesError}
           onMovieSave={onMovieSave}
+          onGetSavedMovies={onGetSavedMovies}
+          savedMovies={savedMovies}
           movies={movies}
         ></MoviesCardList>
       )}

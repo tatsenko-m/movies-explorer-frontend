@@ -1,10 +1,14 @@
 import React from "react";
-import FormError from "../FormError/FormError";
+import FormTooltip from "../FormTooltip/FormTooltip";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const Profile = () => {
+const Profile = ({
+  isUpdateUserError,
+  updateUserErrorMessage,
+  isUpdateUserSuccess,
+  onUpdateUser,
+}) => {
   const currentUser = React.useContext(CurrentUserContext);
-  const isError = false;
 
   const [isEditing, setIsEditing] = React.useState(false);
   const [name, setName] = React.useState(currentUser.name);
@@ -95,9 +99,11 @@ const Profile = () => {
             {emailInputRef.current?.validationMessage}
           </span>
         </div>
-        <FormError
-          isError={isError}
-          errorMessage="При обновлении профиля произошла ошибка."
+        <FormTooltip
+          isError={isUpdateUserError}
+          errorMessage={updateUserErrorMessage}
+          isSuccess={isUpdateUserSuccess}
+          successMessage="Профиль успешно обновлен"
         />
         {isEditing ? (
           <button

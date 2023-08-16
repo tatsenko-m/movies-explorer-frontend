@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import FormError from "../FormError/FormError";
+import FormTooltip from "../FormTooltip/FormTooltip";
 
 const AuthForm = ({
   type,
@@ -128,7 +128,7 @@ const AuthForm = ({
           {passwordInputRef.current?.validationMessage}
         </span>
       </div>
-      <FormError isError={isAuthError} errorMessage={authErrorMessage} />
+      <FormTooltip isError={isAuthError} errorMessage={authErrorMessage} />
       <button
         className={`auth__submit-button ${
           !formRef.current?.checkValidity() && "auth__submit-button_disabled"

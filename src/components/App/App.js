@@ -258,7 +258,12 @@ function App() {
               isLoading ? (
                 <Preloader />
               ) : (
-                <Profile onUpdateUser={handleUpdateUser} />
+                <Profile
+                  isUpdateUserError={isUpdateUserError}
+                  updateUserErrorMessage={updateUserErrorMessage}
+                  isUpdateUserSuccess={isUpdateUserSuccess}
+                  onUpdateUser={handleUpdateUser}
+                />
               )
             }
           />

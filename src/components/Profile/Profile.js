@@ -39,10 +39,11 @@ const Profile = ({
     setIsEditing(true);
   };
 
-  const handleSaveClick = (evt) => {
+  function handleSubmit(evt) {
     evt.preventDefault();
     setIsEditing(false);
-  };
+    onUpdateUser(name, email);
+  }
 
   React.useEffect(() => {
     setName(currentUser.name);
@@ -52,7 +53,7 @@ const Profile = ({
   return (
     <section className="profile">
       <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
-      <form className="profile__form">
+      <form className="profile__form" onSubmit={handleSubmit}>
         <div className="profile__fields">
           <label className="profile__field">
             <span className="profile__caption">Имя</span>
@@ -115,7 +116,6 @@ const Profile = ({
                 : ""
             }`}
             type="submit"
-            onClick={handleSaveClick}
             disabled={
               (name === currentUser.name && email === currentUser.email) ||
               !nameInputRef.current?.validity.valid ||

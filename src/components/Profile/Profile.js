@@ -51,6 +51,9 @@ const Profile = ({
   }, [currentUser]);
 
   React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+
     function handleEscapeKey(event) {
       if (event.key === "Escape") {
         setIsEditing(false);

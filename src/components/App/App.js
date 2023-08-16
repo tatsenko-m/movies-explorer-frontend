@@ -196,6 +196,9 @@ function App() {
   }
 
   function handleUpdateUser(name, email) {
+    setIsUpdateUserError(false);
+    setUpdateUserErrorMessage("");
+    setIsUpdateUserSuccess(false);
     setIsLoading(true);
 
     mainApi

@@ -38,6 +38,8 @@ const Profile = ({
   const handleEditClick = (evt) => {
     evt.preventDefault();
     setIsEditing(true);
+    setName(currentUser.name);
+    setEmail(currentUser.email);
   };
 
   function handleSubmit(evt) {
@@ -52,18 +54,19 @@ const Profile = ({
   }, [currentUser]);
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-
     function handleEscapeKey(event) {
       if (event.key === "Escape") {
+        setName(currentUser.name);
+        setEmail(currentUser.email);
         setIsEditing(false);
       }
     }
 
     function handleOutsideClick(event) {
-      const fieldsContainer = document.querySelector(".profile__fields");
+      const fieldsContainer = document.querySelector(".profile__form");
       if (fieldsContainer && !fieldsContainer.contains(event.target)) {
+        setName(currentUser.name);
+        setEmail(currentUser.email);
         setIsEditing(false);
       }
     }

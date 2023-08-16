@@ -50,6 +50,34 @@ const Profile = ({
     setEmail(currentUser.email);
   }, [currentUser]);
 
+  React.useEffect(() => {
+    function handleEscapeKey(event) {
+      if (event.key === "Escape") {
+        setIsEditing(false);
+      }
+    }
+
+    function handleOutsideClick(event) {
+      const fieldsContainer = document.querySelector(".profile__fields");
+      if (fieldsContainer && !fieldsContainer.contains(event.target)) {
+        setIsEditing(false);
+      }
+    }
+
+    if (isEditing) {
+      document.addEventListener("keydown", handleEscapeKey);
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isEditing]);
+
   return (
     <section className="profile">
       <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>

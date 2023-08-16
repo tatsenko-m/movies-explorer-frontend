@@ -86,18 +86,6 @@ class MainApi {
     });
   }
 
-  setUserAvatar({ avatar }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: avatar,
-      }),
-    }).then((res) => {
-      return this._handleResponse(res);
-    });
-  }
-
   register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",

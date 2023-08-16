@@ -1,17 +1,17 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import FormError from "../FormError/FormError";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const Profile = () => {
-  const initialName = "Виталий";
-  const initialEmail = "pochta@yandex.ru";
+  const currentUser = React.useContext(CurrentUserContext);
   const isError = false;
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(initialName);
-  const [email, setEmail] = useState(initialEmail);
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [name, setName] = React.useState(currentUser.name);
+  const [email, setEmail] = React.useState(currentUser.email);
 
-  const nameInputRef = useRef(null);
-  const emailInputRef = useRef(null);
+  const nameInputRef = React.useRef(null);
+  const emailInputRef = React.useRef(null);
 
   const isNameValid = (value) => {
     const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
@@ -40,9 +40,14 @@ const Profile = () => {
     setIsEditing(false);
   };
 
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
   return (
     <section className="profile">
-      <h1 className="profile__title">Привет, Виталий!</h1>
+      <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
       <form className="profile__form">
         <div className="profile__fields">
           <label className="profile__field">

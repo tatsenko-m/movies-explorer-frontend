@@ -19,7 +19,9 @@ import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(
+    Boolean(localStorage.getItem("token"))
+  );
   const [isLoading, setIsLoading] = React.useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
   const initialMovies = JSON.parse(localStorage.getItem("movies")) || [];
@@ -154,6 +156,7 @@ function App() {
 
         localStorage.setItem("token", data.token);
         handleTokenCheck();
+        navigate("/movies");
       })
       .catch((err) => {
         setIsAuthError(true);
@@ -171,15 +174,20 @@ function App() {
   function handleTokenCheck() {
     const token = localStorage.getItem("token");
     if (token) {
+      setIsLoading(true);
       mainApi.setHeaders(createHeaders());
       mainApi
         .getUserInfo()
         .then((user) => {
           setLoggedIn(true);
           setCurrentUser({ name: user.name, email: user.email });
-          navigate("/movies");
         })
-        .catch((err) => alert(err));
+        .catch((err) => {
+          setLoggedIn(false);
+          setCurrentUser({ name: "", email: "" });
+          alert(err);
+        })
+        .finally(() => setIsLoading(false));
     }
   }
 

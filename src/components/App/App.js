@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 
 import Preloader from "../Preloader/Preloader";
@@ -16,6 +16,7 @@ import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import moviesApi from "../../utils/MoviesApi";
 import { createHeaders } from "../../utils/headers";
 import mainApi from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -32,10 +33,9 @@ function App() {
     React.useState(initialIsShortMovies);
   const [isAuthError, setIsAuthError] = React.useState(false);
   const [authErrorMessage, setAuthErrorMessage] = React.useState("");
-  const [userData, setUserData] = React.useState({ name: "", email: "" });
+  const [currentUser, setCurrentUser] = React.useState({ name: "", email: "" });
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   function handleHamburgerIconClick() {
     setIsHamburgerMenuOpen(true);
@@ -153,9 +153,7 @@ function App() {
         }
 
         localStorage.setItem("token", data.token);
-        mainApi.setHeaders(createHeaders());
-        setLoggedIn(true);
-        navigate("/movies");
+        handleTokenCheck();
       })
       .catch((err) => {
         setIsAuthError(true);
@@ -178,9 +176,8 @@ function App() {
         .getUserInfo()
         .then((user) => {
           setLoggedIn(true);
-          setUserData({ name: user.name, email: user.email });
-          const url = location.state?.backUrl || "/movies";
-          navigate(url);
+          setCurrentUser({ name: user.name, email: user.email });
+          navigate("/movies");
         })
         .catch((err) => alert(err));
     }
@@ -195,7 +192,7 @@ function App() {
   }, [isShortMovies]);
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Header loggedIn={loggedIn} onOpenMenu={handleHamburgerIconClick} />
       <main>
         <Routes>
@@ -258,7 +255,7 @@ function App() {
         isOpen={isHamburgerMenuOpen}
         onClose={closeHamburgerMenu}
       />
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 

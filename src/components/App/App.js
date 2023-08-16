@@ -14,7 +14,8 @@ import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import moviesApi from "../../utils/MoviesApi";
-import * as mainApi from "../../utils/MainApi";
+import { createHeaders } from "../../utils/headers";
+import mainApi from "../../utils/MainApi";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
@@ -31,6 +32,7 @@ function App() {
     React.useState(initialIsShortMovies);
   const [isAuthError, setIsAuthError] = React.useState(false);
   const [authErrorMessage, setAuthErrorMessage] = React.useState("");
+  const [userData, setUserData] = React.useState({ email: "" });
 
   const navigate = useNavigate();
 
@@ -130,6 +132,26 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       });
+  }
+
+  function handleLogin(email, password) {
+    setIsLoading(true);
+
+    mainApi
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          mainApi.setHeaders(createHeaders());
+          setLoggedIn(true);
+          setUserData({ email: email });
+          navigate("/movies");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   React.useEffect(() => {

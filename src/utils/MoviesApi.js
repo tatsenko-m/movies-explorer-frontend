@@ -1,4 +1,4 @@
-import { URL_MOVIES } from '../constants/constants';
+import { URL_MOVIES } from '../constants/config';
 class MoviesApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;

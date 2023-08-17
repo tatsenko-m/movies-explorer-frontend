@@ -1,4 +1,5 @@
 import React from "react";
+import { URL_NOMOREPARTIES } from "../../constants/config";
 
 const MoviesCard = ({
   movie,
@@ -60,7 +61,7 @@ const MoviesCard = ({
         src={
           isSavedMovies
             ? movie.image
-            : `https://api.nomoreparties.co${movie.image.url}`
+            : `${URL_NOMOREPARTIES}${movie.image.url}`
         }
         alt={`Постер фильма ${movie.nameRU}`}
         onClick={handleImageClick}

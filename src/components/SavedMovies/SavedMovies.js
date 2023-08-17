@@ -2,8 +2,10 @@ import React from "react";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
 const SavedMovies = ({
+  isLoading,
   onGetSavedMovies,
   onMovieDelete,
   savedMovies,
@@ -21,14 +23,18 @@ const SavedMovies = ({
         onShortSavedMoviesCheck={onShortSavedMoviesCheck}
         onSearchSavedMovies={onSearchSavedMovies}
       />
-      <MoviesCardList
-        isSavedMovies={true}
-        isNotFoundMovies={isNotFoundMovies}
-        onGetSavedMovies={onGetSavedMovies}
-        onMovieDelete={onMovieDelete}
-        savedMovies={savedMoviesSearchResult}
-        savedMoviesSearchResult={savedMoviesSearchResult}
-      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isSavedMovies={true}
+          isNotFoundMovies={isNotFoundMovies}
+          onGetSavedMovies={onGetSavedMovies}
+          onMovieDelete={onMovieDelete}
+          savedMovies={savedMoviesSearchResult}
+          savedMoviesSearchResult={savedMoviesSearchResult}
+        />
+      )}
     </>
   );
 };

@@ -1,8 +1,10 @@
 import React from "react";
 import FormTooltip from "../FormTooltip/FormTooltip";
+import Preloader from "../Preloader/Preloader";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const Profile = ({
+  isLoading,
   isUpdateUserError,
   updateUserErrorMessage,
   isUpdateUserSuccess,
@@ -85,7 +87,9 @@ const Profile = ({
     };
   }, [isEditing]);
 
-  return (
+  return isLoading ? (
+    <Preloader />
+  ) : (
     <section className="profile">
       <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
       <form className="profile__form" onSubmit={handleSubmit}>

@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 
 import Preloader from "../Preloader/Preloader";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -298,7 +299,9 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies
+              <ProtectedRoute
+                element={Movies}
+                loggedIn={loggedIn}
                 isLoading={isLoading}
                 isShortMovies={isShortMovies}
                 onShortMoviesCheck={handleShortMoviesCheck}
@@ -316,36 +319,34 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              isLoading ? (
-                <Preloader />
-              ) : (
-                <SavedMovies
-                  onGetSavedMovies={getSavedMovies}
-                  onMovieDelete={handleDeleteMovie}
-                  savedMovies={savedMovies}
-                  savedMoviesSearchResult={savedMoviesSearchResult}
-                  isShortSavedMovies={isShortSavedMovies}
-                  onShortSavedMoviesCheck={handleShortSavedMoviesCheck}
-                  onSearchSavedMovies={handleSearchSavedMovies}
-                  isNotFoundMovies={isNotFoundMovies}
-                />
-              )
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+                isLoading={isLoading}
+                onGetSavedMovies={getSavedMovies}
+                onMovieDelete={handleDeleteMovie}
+                savedMovies={savedMovies}
+                savedMoviesSearchResult={savedMoviesSearchResult}
+                isShortSavedMovies={isShortSavedMovies}
+                onShortSavedMoviesCheck={handleShortSavedMoviesCheck}
+                onSearchSavedMovies={handleSearchSavedMovies}
+                isNotFoundMovies={isNotFoundMovies}
+              />
             }
           />
           <Route
             path="/profile"
             element={
-              isLoading ? (
-                <Preloader />
-              ) : (
-                <Profile
-                  isUpdateUserError={isUpdateUserError}
-                  updateUserErrorMessage={updateUserErrorMessage}
-                  isUpdateUserSuccess={isUpdateUserSuccess}
-                  onUpdateUser={handleUpdateUser}
-                  onSignOut={handleSignOut}
-                />
-              )
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                isLoading={isLoading}
+                isUpdateUserError={isUpdateUserError}
+                updateUserErrorMessage={updateUserErrorMessage}
+                isUpdateUserSuccess={isUpdateUserSuccess}
+                onUpdateUser={handleUpdateUser}
+                onSignOut={handleSignOut}
+              />
             }
           />
           <Route

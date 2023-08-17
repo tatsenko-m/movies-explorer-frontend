@@ -5,7 +5,9 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 const SearchForm = ({
   isSavedMovies,
   isShortMovies,
+  isShortSavedMovies,
   onShortMoviesCheck,
+  onShortSavedMoviesCheck,
   onSearchMovies,
   onSearchSavedMovies,
 }) => {
@@ -71,8 +73,11 @@ const SearchForm = ({
           {inputError && "Нужно ввести ключевое слово"}
         </span>
         <FilterCheckbox
+          isSavedMovies={isSavedMovies}
           isShortMovies={isShortMovies}
+          isShortSavedMovies={isShortSavedMovies}
           onShortMoviesCheck={onShortMoviesCheck}
+          onShortSavedMoviesCheck={onShortSavedMoviesCheck}
         />
       </form>
     </section>

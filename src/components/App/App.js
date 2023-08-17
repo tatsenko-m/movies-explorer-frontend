@@ -38,6 +38,7 @@ function App() {
     JSON.parse(localStorage.getItem("isShortMovies")) || false;
   const [isShortMovies, setIsShortMovies] =
     React.useState(initialIsShortMovies);
+  const [isShortSavedMovies, setIsShortSavedMovies] = React.useState(false);
   const [isAuthError, setIsAuthError] = React.useState(false);
   const [authErrorMessage, setAuthErrorMessage] = React.useState("");
   const [isUpdateUserError, setIsUpdateUserError] = React.useState(false);
@@ -59,6 +60,10 @@ function App() {
 
   function handleShortMoviesCheck(evt) {
     setIsShortMovies(evt.target.checked);
+  }
+
+  function handleShortSavedMoviesCheck(evt) {
+    setIsShortSavedMovies(evt.target.checked);
   }
 
   function handleSearchMovies(searchQuery) {
@@ -107,7 +112,11 @@ function App() {
     setIsLoading(true);
     setIsNotFoundMovies(false);
 
-    const result = handleSearchQuery(savedMovies, searchQuery);
+    const result = handleSearchQuery(
+      savedMovies,
+      searchQuery,
+      isShortSavedMovies
+    );
     if (result.length === 0) {
       setSavedMoviesSearchResult([]);
       setIsNotFoundMovies(true);
@@ -315,8 +324,8 @@ function App() {
                   onMovieDelete={handleDeleteMovie}
                   savedMovies={savedMovies}
                   savedMoviesSearchResult={savedMoviesSearchResult}
-                  isShortMovies={isShortMovies}
-                  onShortMoviesCheck={handleShortMoviesCheck}
+                  isShortSavedMovies={isShortSavedMovies}
+                  onShortSavedMoviesCheck={handleShortSavedMoviesCheck}
                   onSearchSavedMovies={handleSearchSavedMovies}
                 />
               )

@@ -8,16 +8,16 @@ const SavedMovies = ({
   onMovieDelete,
   savedMovies,
   savedMoviesSearchResult,
-  isShortMovies,
-  onShortMoviesCheck,
+  isShortSavedMovies,
+  onShortSavedMoviesCheck,
   onSearchSavedMovies,
 }) => {
   return (
     <>
       <SearchForm
         isSavedMovies={true}
-        isShortMovies={isShortMovies}
-        onShortMoviesCheck={onShortMoviesCheck}
+        isShortSavedMovies={isShortSavedMovies}
+        onShortSavedMoviesCheck={onShortSavedMoviesCheck}
         onSearchSavedMovies={onSearchSavedMovies}
       />
       <MoviesCardList

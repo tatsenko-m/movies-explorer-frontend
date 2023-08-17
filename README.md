@@ -1,7 +1,7 @@
 # Movies Explorer: дипломный проект в Яндекс Практикуме (frontend)
-Репозиторий для приложения проекта `Movies Explorer`, включающий верстку и JSX. 
+Репозиторий для приложения проекта `Movies Explorer`, включающий верстку и функциональность на React и JS. 
 
-> Репозиторий, где ведется работа на backend-частью проекта `Movies Explorer`: [tatsenko-m/movies-explorer-api](https://github.com/tatsenko-m/movies-explorer-api.git)
+> Репозиторий с backend-частью проекта `Movies Explorer`: [tatsenko-m/movies-explorer-api](https://github.com/tatsenko-m/movies-explorer-api.git)
 
 ## Дополнительная информация
 
@@ -9,8 +9,10 @@
 
     https://disk.yandex.ru/d/79ew7CPdbOqIEQ
 
-* Авторизованное и неавторизованное состояние Header меняется через стейт loggedIn в App.js
+## Ссылки на проект
 
-* Прелоадер добавляется и убирается через стейт isLoading в App.js
+IP 51.250.72.22
 
-* Сообщение об ошибке бэкенда в формах аутентификации и редактирования профиля (FormError) добавляется и убирается через переменную isError, определенную в компонентах AuthForm и Profile
+Frontend https://movies-explore.nomoredomains.xyz
+
+Backend https://api.movies-explore.nomoredomains.xyz

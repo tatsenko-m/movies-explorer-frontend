@@ -249,9 +249,9 @@ function App() {
       mainApi.setHeaders(createHeaders());
       mainApi
         .saveMovie(movie)
-        .then((res) => {
-          getSavedMovies();
-        })
+        .then((newSavedMovie) =>
+          setSavedMovies([newSavedMovie, ...savedMovies])
+        )
         .catch((err) => alert(err));
     }
   }

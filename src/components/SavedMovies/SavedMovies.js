@@ -22,7 +22,11 @@ const SavedMovies = ({
       <MoviesCardList
         isSavedMovies={true}
         onGetSavedMovies={onGetSavedMovies}
-        savedMovies={savedMovies}
+        savedMovies={
+          savedMoviesSearchResult.length > 0
+            ? savedMoviesSearchResult
+            : savedMovies
+        }
         savedMoviesSearchResult={savedMoviesSearchResult}
       />
     </>

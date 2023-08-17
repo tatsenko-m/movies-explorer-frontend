@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 
 import Preloader from "../Preloader/Preloader";
@@ -28,8 +28,9 @@ function App() {
   const [movies, setMovies] = React.useState(initialMovies);
   const [apiMovies, setApiMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [savedMoviesSearchResult, setSavedMoviesSearchResult] =
-    React.useState(savedMovies);
+  const [savedMoviesSearchResult, setSavedMoviesSearchResult] = React.useState(
+    []
+  );
   const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
   const [isMoviesError, setIsMoviesError] = React.useState(false);
   const initialIsShortMovies =
@@ -45,6 +46,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({ name: "", email: "" });
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   function handleHamburgerIconClick() {
     setIsHamburgerMenuOpen(true);
@@ -122,8 +124,10 @@ function App() {
   function handleSearchSavedMovies(searchQuery) {
     setIsLoading(true);
     setIsNotFoundMovies(false);
+
     const result = handleSearchQuery(savedMovies, searchQuery);
     if (result.length === 0) {
+      setSavedMoviesSearchResult([]);
       setIsNotFoundMovies(true);
     } else {
       setSavedMoviesSearchResult(result);
@@ -278,7 +282,7 @@ function App() {
     if (loggedIn) {
       getSavedMovies();
     }
-  }, []);
+  }, [loggedIn]);
 
   React.useEffect(() => {
     handleTokenCheck();
@@ -287,6 +291,12 @@ function App() {
   React.useEffect(() => {
     localStorage.setItem("isShortMovies", JSON.stringify(isShortMovies));
   }, [isShortMovies]);
+
+  React.useEffect(() => {
+    if (location.pathname === "/saved-movies") {
+      setSavedMoviesSearchResult(savedMovies);
+    }
+  }, [savedMovies, location.pathname]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

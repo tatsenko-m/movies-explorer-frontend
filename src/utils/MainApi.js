@@ -74,8 +74,8 @@ class MainApi {
     }).then(this._handleResponse);
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteMovie(movieDBId) {
+    return fetch(`${this._baseUrl}/movies/${movieDBId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {

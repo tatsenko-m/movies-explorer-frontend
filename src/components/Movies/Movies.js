@@ -11,7 +11,6 @@ const Movies = ({
   onSearchMovies,
   isNotFoundMovies,
   isMoviesError,
-  onGetSavedMovies,
   onMovieSave,
   onMovieDelete,
   savedMovies,
@@ -34,7 +33,6 @@ const Movies = ({
           isMoviesError={isMoviesError}
           onMovieSave={onMovieSave}
           onMovieDelete={onMovieDelete}
-          onGetSavedMovies={onGetSavedMovies}
           savedMovies={savedMovies}
           movies={movies}
         />

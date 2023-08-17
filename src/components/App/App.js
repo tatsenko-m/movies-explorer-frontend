@@ -308,7 +308,6 @@ function App() {
                 onSearchMovies={handleSearchMovies}
                 isNotFoundMovies={isNotFoundMovies}
                 isMoviesError={isMoviesError}
-                onGetSavedMovies={getSavedMovies}
                 onMovieSave={handleSaveMovie}
                 onMovieDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
@@ -323,9 +322,7 @@ function App() {
                 element={SavedMovies}
                 loggedIn={loggedIn}
                 isLoading={isLoading}
-                onGetSavedMovies={getSavedMovies}
                 onMovieDelete={handleDeleteMovie}
-                savedMovies={savedMovies}
                 savedMoviesSearchResult={savedMoviesSearchResult}
                 isShortSavedMovies={isShortSavedMovies}
                 onShortSavedMoviesCheck={handleShortSavedMoviesCheck}

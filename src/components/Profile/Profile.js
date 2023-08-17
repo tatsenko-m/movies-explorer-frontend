@@ -85,6 +85,7 @@ const Profile = ({
       document.removeEventListener("keydown", handleEscapeKey);
       document.removeEventListener("mousedown", handleOutsideClick);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditing]);
 
   return isLoading ? (

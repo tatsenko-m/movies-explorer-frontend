@@ -7,9 +7,7 @@ const MoviesCardList = ({
   isMoviesError,
   onMovieSave,
   onMovieDelete,
-  onGetSavedMovies,
   savedMovies,
-  savedMoviesSearchResult,
   movies,
 }) => {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);

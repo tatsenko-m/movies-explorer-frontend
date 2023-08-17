@@ -56,6 +56,7 @@ const SearchForm = ({
         onSearchSavedMovies(searchFormInput);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortMovies, isShortSavedMovies, isSavedMovies]);
 
   return (

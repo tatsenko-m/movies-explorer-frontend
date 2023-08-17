@@ -17,11 +17,10 @@ const Movies = ({
   savedMovies,
   movies,
 }) => {
-  const isSavedMovies = false;
-
   return (
     <>
       <SearchForm
+        isSavedMovies={false}
         isShortMovies={isShortMovies}
         onShortMoviesCheck={onShortMoviesCheck}
         onSearchMovies={onSearchMovies}
@@ -30,7 +29,7 @@ const Movies = ({
         <Preloader />
       ) : (
         <MoviesCardList
-          isSavedMovies={isSavedMovies}
+          isSavedMovies={false}
           isMoreButtonVisible={true}
           isNotFoundMovies={isNotFoundMovies}
           isMoviesError={isMoviesError}
@@ -39,7 +38,7 @@ const Movies = ({
           onGetSavedMovies={onGetSavedMovies}
           savedMovies={savedMovies}
           movies={movies}
-        ></MoviesCardList>
+        />
       )}
     </>
   );

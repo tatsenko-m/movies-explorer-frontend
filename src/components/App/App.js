@@ -28,6 +28,9 @@ function App() {
   const [movies, setMovies] = React.useState(initialMovies);
   const [apiMovies, setApiMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [savedMoviesSearchResult, setSavedMoviesSearchResult] = React.useState(
+    []
+  );
   const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
   const [isMoviesError, setIsMoviesError] = React.useState(false);
   const initialIsShortMovies =
@@ -115,6 +118,18 @@ function App() {
         setIsLoading(false);
       }
     }
+  }
+
+  function handleSearchSavedMovies(searchQuery) {
+    setIsLoading(true);
+    setIsNotFoundMovies(false);
+    const result = handleSearchQuery(savedMovies, searchQuery);
+    if (result.length === 0) {
+      setIsNotFoundMovies(true);
+    } else {
+      setSavedMoviesSearchResult(result);
+    }
+    setIsLoading(false);
   }
 
   function handleRegister(name, email, password) {
@@ -304,6 +319,7 @@ function App() {
                   onGetSavedMovies={getSavedMovies}
                   onMovieDelete={handleDeleteMovie}
                   savedMovies={savedMovies}
+                  onSearchSavedMovies={handleSearchSavedMovies}
                 />
               )
             }

@@ -2,10 +2,20 @@ import React from "react";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-const SearchForm = ({ isShortMovies, onShortMoviesCheck, onSearchMovies }) => {
+const SearchForm = ({
+  isSavedMovies,
+  isShortMovies,
+  onShortMoviesCheck,
+  onSearchMovies,
+  onSearchSavedMovies,
+}) => {
   const [searchFormInput, setSearchFormInput] = React.useState(() => {
-    const storedValue = localStorage.getItem("searchFormInput");
-    return storedValue ? storedValue : "";
+    if (isSavedMovies) {
+      return "";
+    } else {
+      const storedValue = localStorage.getItem("searchFormInput");
+      return storedValue ? storedValue : "";
+    }
   });
 
   const [inputError, setInputError] = React.useState(false);
@@ -20,8 +30,12 @@ const SearchForm = ({ isShortMovies, onShortMoviesCheck, onSearchMovies }) => {
     evt.preventDefault();
     if (searchFormInput.trim() !== "") {
       setInputError(false);
-      onSearchMovies(searchFormInput);
-      localStorage.setItem("searchFormInput", searchFormInput);
+      if (isSavedMovies) {
+        onSearchSavedMovies(searchFormInput);
+      } else {
+        onSearchMovies(searchFormInput);
+        localStorage.setItem("searchFormInput", searchFormInput);
+      }
       setInputChanged(false);
     } else {
       setInputError(true);
@@ -29,12 +43,14 @@ const SearchForm = ({ isShortMovies, onShortMoviesCheck, onSearchMovies }) => {
   }
 
   React.useEffect(() => {
-    const storedValue = localStorage.getItem("searchFormInput");
-    if (!inputChanged && storedValue) {
-      setSearchFormInput(storedValue);
-      onSearchMovies(storedValue);
+    if (!isSavedMovies) {
+      const storedValue = localStorage.getItem("searchFormInput");
+      if (!inputChanged && storedValue) {
+        setSearchFormInput(storedValue);
+        onSearchMovies(storedValue);
+      }
     }
-  }, [isShortMovies]);
+  }, [isShortMovies, isSavedMovies]);
 
   return (
     <section className="search">

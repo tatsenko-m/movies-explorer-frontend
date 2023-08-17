@@ -252,17 +252,14 @@ function App() {
       .catch((err) => alert(err));
   }
 
-  function handleDeleteMovie(movie) {
-    setIsLoading(true);
-
+  function handleDeleteMovie(movieDBId) {
     mainApi.setHeaders(createHeaders());
     mainApi
-      .deleteMovie(movie._id)
+      .deleteMovie(movieDBId)
       .then(() => {
-        setSavedMovies(() => savedMovies.filter((m) => m._id !== movie._id));
+        setSavedMovies(() => savedMovies.filter((m) => m._id !== movieDBId));
       })
-      .catch((err) => alert(err))
-      .finally(() => setIsLoading(false));
+      .catch((err) => alert(err));
   }
 
   React.useEffect(() => {
@@ -290,6 +287,8 @@ function App() {
                 isNotFoundMovies={isNotFoundMovies}
                 isMoviesError={isMoviesError}
                 onGetSavedMovies={getSavedMovies}
+                onMovieSave={handleSaveMovie}
+                onMovieDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
                 movies={movies}
               />
@@ -303,6 +302,7 @@ function App() {
               ) : (
                 <SavedMovies
                   onGetSavedMovies={getSavedMovies}
+                  onMovieDelete={handleDeleteMovie}
                   savedMovies={savedMovies}
                 />
               )

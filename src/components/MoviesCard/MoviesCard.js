@@ -1,14 +1,12 @@
 import React from "react";
 
-const MoviesCard = ({ movie, isSavedMovies, isSaved }) => {
-  const [isSavedState, setIsSavedState] = React.useState(isSaved);
-
+const MoviesCard = ({ movie, isSavedMovies, isSaved, onMovieSave }) => {
   const movieSaveButtonClassName = `movies-card__save-button ${
-    isSavedState && "movies-card__save-button_active"
+    isSaved && "movies-card__save-button_active"
   }`;
 
   function handleSaveClick() {
-    setIsSavedState(!isSavedState);
+    onMovieSave(isSaved, movie);
   }
 
   function handleImageClick() {
@@ -62,7 +60,7 @@ const MoviesCard = ({ movie, isSavedMovies, isSaved }) => {
             type="button"
             onClick={handleSaveClick}
           >
-            {isSavedState ? "" : "Сохранить"}
+            {isSaved ? "" : "Сохранить"}
           </button>
         )}
       </div>

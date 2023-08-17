@@ -6,6 +6,7 @@ const MoviesCardList = ({
   isNotFoundMovies,
   isMoviesError,
   onMovieSave,
+  onMovieDelete,
   onGetSavedMovies,
   savedMovies,
   movies,
@@ -72,6 +73,23 @@ const MoviesCardList = ({
     isSavedMovies && "movies-cards_saved"
   }`;
 
+  const isMovieSaved = (movie) => {
+    return savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+  };
+
+  const toggleSaveClick = (isSaved, movie) => {
+    if (!isSaved) {
+      onMovieSave(movie);
+    } else {
+      const savedMovie = savedMovies.find(
+        (savedMovie) => savedMovie.movieId === movie.id
+      );
+      if (savedMovie) {
+        onMovieDelete(savedMovie._id);
+      }
+    }
+  };
+
   const moviesElements = movies
     .slice(0, visibleMoviesCount)
     .map((movie) => (
@@ -79,14 +97,16 @@ const MoviesCardList = ({
         movie={movie}
         key={movie.id}
         isSavedMovies={isSavedMovies}
-        isSaved={false}
-        onMovieSave={onMovieSave}
+        isSaved={isMovieSaved(movie)}
+        onMovieSave={toggleSaveClick}
       />
     ));
 
   React.useEffect(() => {
-    onGetSavedMovies();
-  }, []);
+    if (savedMovies.length === 0) {
+      onGetSavedMovies();
+    }
+  }, [onGetSavedMovies, savedMovies]);
 
   return (
     <section className={moviesCardsClassName}>

@@ -51,8 +51,12 @@ const SearchForm = ({
         setSearchFormInput(storedValue);
         onSearchMovies(storedValue);
       }
+    } else {
+      if (!inputChanged && searchFormInput) {
+        onSearchSavedMovies(searchFormInput);
+      }
     }
-  }, [isShortMovies, isSavedMovies]);
+  }, [isShortMovies, isShortSavedMovies, isSavedMovies]);
 
   return (
     <section className="search">

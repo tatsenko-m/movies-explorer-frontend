@@ -9,6 +9,7 @@ const MoviesCardList = ({
   onMovieDelete,
   onGetSavedMovies,
   savedMovies,
+  savedMoviesSearchResult,
   movies,
 }) => {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
@@ -54,11 +55,6 @@ const MoviesCardList = ({
     };
   }, [calculateVisibleMoviesCount]);
 
-  const handleShowMore = () => {
-    const additionalMoviesCount = getAdditionalMoviesCount();
-    setVisibleMoviesCount(visibleMoviesCount + additionalMoviesCount);
-  };
-
   const getAdditionalMoviesCount = () => {
     if (windowWidth >= 1280) {
       return 3;
@@ -90,23 +86,33 @@ const MoviesCardList = ({
     }
   };
 
-  const moviesElements = movies
-    .slice(0, visibleMoviesCount)
-    .map((movie) => (
-      <MoviesCard
-        movie={movie}
-        key={movie.id}
-        isSavedMovies={isSavedMovies}
-        isSaved={isMovieSaved(movie)}
-        onMovieSave={toggleSaveClick}
-      />
-    ));
+  const renderedMovies = isSavedMovies
+    ? savedMovies.map((savedMovie) => (
+        <MoviesCard
+          movie={savedMovie}
+          key={savedMovie._id}
+          isSavedMovies={isSavedMovies}
+          onMovieDelete={onMovieDelete}
+        />
+      ))
+    : movies
+        .slice(0, visibleMoviesCount)
+        .map((movie) => (
+          <MoviesCard
+            movie={movie}
+            key={movie.id}
+            isSavedMovies={isSavedMovies}
+            isSaved={isMovieSaved(movie)}
+            onMovieSave={toggleSaveClick}
+          />
+        ));
 
-  React.useEffect(() => {
-    if (savedMovies.length === 0) {
-      onGetSavedMovies();
+  const handleShowMore = () => {
+    if (!isSavedMovies) {
+      const additionalMoviesCount = getAdditionalMoviesCount();
+      setVisibleMoviesCount(visibleMoviesCount + additionalMoviesCount);
     }
-  }, [onGetSavedMovies, savedMovies]);
+  };
 
   return (
     <section className={moviesCardsClassName}>
@@ -119,8 +125,8 @@ const MoviesCardList = ({
         </p>
       ) : (
         <>
-          <ul className="movies-cards__list">{moviesElements}</ul>
-          {visibleMoviesCount < movies.length && (
+          <ul className="movies-cards__list">{renderedMovies}</ul>
+          {!isSavedMovies && visibleMoviesCount < movies.length && (
             <button
               className="movies-cards__more-button"
               onClick={handleShowMore}
@@ -134,4 +140,4 @@ const MoviesCardList = ({
   );
 };
 
-export default MoviesCardList;
+export default React.memo(MoviesCardList);

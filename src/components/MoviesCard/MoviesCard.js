@@ -47,7 +47,7 @@ const MoviesCard = ({ movie, isSavedMovies, isSaved, onMovieSave }) => {
       </div>
       <img
         className="movies-card__image"
-        src={`https://api.nomoreparties.co${movie.image.url}`}
+        src={isSavedMovies ? movie.image : `https://api.nomoreparties.co${movie.image.url}`}
         alt={`Постер фильма ${movie.nameRU}`}
         onClick={handleImageClick}
       />

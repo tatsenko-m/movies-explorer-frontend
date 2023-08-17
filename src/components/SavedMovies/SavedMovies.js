@@ -6,19 +6,24 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 const SavedMovies = ({
   onGetSavedMovies,
   savedMovies,
+  savedMoviesSearchResult,
+  isShortMovies,
+  onShortMoviesCheck,
   onSearchSavedMovies,
 }) => {
   return (
     <>
       <SearchForm
         isSavedMovies={true}
+        isShortMovies={isShortMovies}
+        onShortMoviesCheck={onShortMoviesCheck}
         onSearchSavedMovies={onSearchSavedMovies}
       />
       <MoviesCardList
         isSavedMovies={true}
-        isMoreButtonVisible={false}
         onGetSavedMovies={onGetSavedMovies}
         savedMovies={savedMovies}
+        savedMoviesSearchResult={savedMoviesSearchResult}
       />
     </>
   );

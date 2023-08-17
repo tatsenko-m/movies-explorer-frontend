@@ -28,9 +28,8 @@ function App() {
   const [movies, setMovies] = React.useState(initialMovies);
   const [apiMovies, setApiMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [savedMoviesSearchResult, setSavedMoviesSearchResult] = React.useState(
-    []
-  );
+  const [savedMoviesSearchResult, setSavedMoviesSearchResult] =
+    React.useState(savedMovies);
   const [isNotFoundMovies, setIsNotFoundMovies] = React.useState(false);
   const [isMoviesError, setIsMoviesError] = React.useState(false);
   const initialIsShortMovies =
@@ -247,16 +246,14 @@ function App() {
   function getSavedMovies() {
     setIsLoading(true);
 
-    if (loggedIn) {
-      mainApi.setHeaders(createHeaders());
-      mainApi
-        .getSavedMovies()
-        .then((savedMovies) => {
-          setSavedMovies(savedMovies);
-        })
-        .catch((err) => alert(err))
-        .finally(() => setIsLoading(false));
-    }
+    mainApi.setHeaders(createHeaders());
+    mainApi
+      .getSavedMovies()
+      .then((savedMovies) => {
+        setSavedMovies(savedMovies);
+      })
+      .catch((err) => alert(err))
+      .finally(() => setIsLoading(false));
   }
 
   function handleSaveMovie(movie) {
@@ -276,6 +273,12 @@ function App() {
       })
       .catch((err) => alert(err));
   }
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      getSavedMovies();
+    }
+  }, []);
 
   React.useEffect(() => {
     handleTokenCheck();
@@ -319,6 +322,9 @@ function App() {
                   onGetSavedMovies={getSavedMovies}
                   onMovieDelete={handleDeleteMovie}
                   savedMovies={savedMovies}
+                  savedMoviesSearchResult={savedMoviesSearchResult}
+                  isShortMovies={isShortMovies}
+                  onShortMoviesCheck={handleShortMoviesCheck}
                   onSearchSavedMovies={handleSearchSavedMovies}
                 />
               )

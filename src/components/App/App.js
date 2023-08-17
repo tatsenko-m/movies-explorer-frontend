@@ -245,15 +245,24 @@ function App() {
   }
 
   function handleSaveMovie(movie) {
-    if (loggedIn) {
-      mainApi.setHeaders(createHeaders());
-      mainApi
-        .saveMovie(movie)
-        .then((newSavedMovie) =>
-          setSavedMovies([newSavedMovie, ...savedMovies])
-        )
-        .catch((err) => alert(err));
-    }
+    mainApi.setHeaders(createHeaders());
+    mainApi
+      .saveMovie(movie)
+      .then((newSavedMovie) => setSavedMovies([newSavedMovie, ...savedMovies]))
+      .catch((err) => alert(err));
+  }
+
+  function handleDeleteMovie(movie) {
+    setIsLoading(true);
+
+    mainApi.setHeaders(createHeaders());
+    mainApi
+      .deleteMovie(movie._id)
+      .then(() => {
+        setSavedMovies(() => savedMovies.filter((m) => m._id !== movie._id));
+      })
+      .catch((err) => alert(err))
+      .finally(() => setIsLoading(false));
   }
 
   React.useEffect(() => {

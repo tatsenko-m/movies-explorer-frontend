@@ -15,6 +15,7 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import moviesApi from "../../utils/MoviesApi";
 import { createHeaders } from "../../utils/headers";
+import { handleSearchQuery } from "../../utils/filter-movies";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
@@ -60,25 +61,6 @@ function App() {
     setIsShortMovies(evt.target.checked);
   }
 
-  function handleSearchQuery(movies, searchQuery) {
-    const isCyrillic = /[а-яА-ЯЁё]/.test(searchQuery);
-
-    const searchPattern = new RegExp(searchQuery, "i");
-
-    const filterMovies = (movie) => {
-      const searchField = isCyrillic ? "nameRU" : "nameEN";
-      const name = movie[searchField];
-
-      if (isShortMovies) {
-        return searchPattern.test(name) && movie.duration <= 40;
-      } else {
-        return searchPattern.test(name);
-      }
-    };
-
-    return movies.filter(filterMovies);
-  }
-
   function handleSearchMovies(searchQuery) {
     setIsLoading(true);
     setMovies([]);
@@ -89,7 +71,7 @@ function App() {
         .getMovies()
         .then((movies) => {
           setApiMovies(movies);
-          const result = handleSearchQuery(movies, searchQuery);
+          const result = handleSearchQuery(movies, searchQuery, isShortMovies);
           if (result.length === 0) {
             setIsNotFoundMovies(true);
             localStorage.removeItem("movies");
@@ -107,7 +89,7 @@ function App() {
           setIsLoading(false);
         });
     } else {
-      const result = handleSearchQuery(apiMovies, searchQuery);
+      const result = handleSearchQuery(apiMovies, searchQuery, isShortMovies);
       if (result.length === 0) {
         setIsNotFoundMovies(true);
         localStorage.removeItem("movies");

@@ -30,7 +30,6 @@ const Movies = ({
       ) : (
         <MoviesCardList
           isSavedMovies={false}
-          isMoreButtonVisible={true}
           isNotFoundMovies={isNotFoundMovies}
           isMoviesError={isMoviesError}
           onMovieSave={onMovieSave}

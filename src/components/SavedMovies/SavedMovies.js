@@ -11,6 +11,7 @@ const SavedMovies = ({
   isShortSavedMovies,
   onShortSavedMoviesCheck,
   onSearchSavedMovies,
+  isNotFoundMovies,
 }) => {
   return (
     <>
@@ -22,13 +23,10 @@ const SavedMovies = ({
       />
       <MoviesCardList
         isSavedMovies={true}
+        isNotFoundMovies={isNotFoundMovies}
         onGetSavedMovies={onGetSavedMovies}
         onMovieDelete={onMovieDelete}
-        savedMovies={
-          savedMoviesSearchResult.length > 0
-            ? savedMoviesSearchResult
-            : savedMovies
-        }
+        savedMovies={savedMoviesSearchResult}
         savedMoviesSearchResult={savedMoviesSearchResult}
       />
     </>

@@ -327,6 +327,7 @@ function App() {
                   isShortSavedMovies={isShortSavedMovies}
                   onShortSavedMoviesCheck={handleShortSavedMoviesCheck}
                   onSearchSavedMovies={handleSearchSavedMovies}
+                  isNotFoundMovies={isNotFoundMovies}
                 />
               )
             }

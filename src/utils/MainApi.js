@@ -84,16 +84,6 @@ class MainApi {
     });
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
-    const method = isLiked ? "PUT" : "DELETE";
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: method,
-      headers: this._headers,
-    }).then((res) => {
-      return this._handleResponse(res);
-    });
-  }
-
   register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",

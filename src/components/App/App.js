@@ -1,5 +1,11 @@
 import React from "react";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
 
 import Preloader from "../Preloader/Preloader";
@@ -346,34 +352,49 @@ function App() {
               />
             }
           />
-          <Route
-            path="/signup"
-            element={
-              isLoading ? (
-                <Preloader />
-              ) : (
-                <Register
-                  isAuthError={isAuthError}
-                  authErrorMessage={authErrorMessage}
-                  onRegister={handleRegister}
-                />
-              )
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              isLoading ? (
-                <Preloader />
-              ) : (
-                <Login
-                  isAuthError={isAuthError}
-                  authErrorMessage={authErrorMessage}
-                  onLogin={handleLogin}
-                />
-              )
-            }
-          />
+          {loggedIn ? (
+            <>
+              <Route
+                path="/signup"
+                element={<Navigate to={location.state?.backUrl || "/"} />}
+              />
+              <Route
+                path="/signin"
+                element={<Navigate to={location.state?.backUrl || "/"} />}
+              />
+            </>
+          ) : (
+            <>
+              <Route
+                path="/signup"
+                element={
+                  isLoading ? (
+                    <Preloader />
+                  ) : (
+                    <Register
+                      isAuthError={isAuthError}
+                      authErrorMessage={authErrorMessage}
+                      onRegister={handleRegister}
+                    />
+                  )
+                }
+              />
+              <Route
+                path="/signin"
+                element={
+                  isLoading ? (
+                    <Preloader />
+                  ) : (
+                    <Login
+                      isAuthError={isAuthError}
+                      authErrorMessage={authErrorMessage}
+                      onLogin={handleLogin}
+                    />
+                  )
+                }
+              />
+            </>
+          )}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

@@ -1,12 +1,22 @@
 import React from "react";
 
-const MoviesCard = ({ movie, isSavedMovies, isSaved, onMovieSave }) => {
+const MoviesCard = ({
+  movie,
+  isSavedMovies,
+  isSaved,
+  onMovieSave,
+  onMovieDelete,
+}) => {
   const movieSaveButtonClassName = `movies-card__save-button ${
     isSaved && "movies-card__save-button_active"
   }`;
 
   function handleSaveClick() {
     onMovieSave(isSaved, movie);
+  }
+
+  function handleDeleteClick() {
+    onMovieDelete(movie._id);
   }
 
   function handleImageClick() {
@@ -47,13 +57,21 @@ const MoviesCard = ({ movie, isSavedMovies, isSaved, onMovieSave }) => {
       </div>
       <img
         className="movies-card__image"
-        src={isSavedMovies ? movie.image : `https://api.nomoreparties.co${movie.image.url}`}
+        src={
+          isSavedMovies
+            ? movie.image
+            : `https://api.nomoreparties.co${movie.image.url}`
+        }
         alt={`Постер фильма ${movie.nameRU}`}
         onClick={handleImageClick}
       />
       <div className="movies-card__footer">
         {isSavedMovies ? (
-          <button className="movies-card__delete-button" type="button"></button>
+          <button
+            className="movies-card__delete-button"
+            type="button"
+            onClick={handleDeleteClick}
+          ></button>
         ) : (
           <button
             className={movieSaveButtonClassName}

@@ -5,6 +5,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 const SavedMovies = ({
   onGetSavedMovies,
+  onMovieDelete,
   savedMovies,
   savedMoviesSearchResult,
   isShortMovies,
@@ -22,6 +23,7 @@ const SavedMovies = ({
       <MoviesCardList
         isSavedMovies={true}
         onGetSavedMovies={onGetSavedMovies}
+        onMovieDelete={onMovieDelete}
         savedMovies={
           savedMoviesSearchResult.length > 0
             ? savedMoviesSearchResult

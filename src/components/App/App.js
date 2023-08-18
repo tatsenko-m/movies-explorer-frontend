@@ -141,7 +141,7 @@ function App() {
     mainApi
       .register(name, email, password)
       .then(() => {
-        navigate("/movies");
+        handleLogin(email, password);
       })
       .catch((err) => {
         setIsAuthError(true);
@@ -176,7 +176,16 @@ function App() {
         }
 
         localStorage.setItem("token", data.token);
-        handleTokenCheck();
+        setLoggedIn(true);
+        mainApi.setHeaders(createHeaders());
+        mainApi
+          .getUserInfo()
+          .then((user) => {
+            setCurrentUser({ name: user.name, email: user.email });
+          })
+          .catch((err) => {
+            alert(err);
+          });
         navigate("/movies");
       })
       .catch((err) => {
@@ -190,26 +199,6 @@ function App() {
         }
       })
       .finally(() => setIsLoading(false));
-  }
-
-  function handleTokenCheck() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoading(true);
-      mainApi.setHeaders(createHeaders());
-      mainApi
-        .getUserInfo()
-        .then((user) => {
-          setLoggedIn(true);
-          setCurrentUser({ name: user.name, email: user.email });
-        })
-        .catch((err) => {
-          setLoggedIn(false);
-          setCurrentUser({ name: "", email: "" });
-          alert(err);
-        })
-        .finally(() => setIsLoading(false));
-    }
   }
 
   function handleUpdateUser(name, email) {
@@ -283,7 +272,24 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    handleTokenCheck();
+    const token = localStorage.getItem("token");
+    if (token) {
+      mainApi.setHeaders(createHeaders());
+      mainApi
+        .getUserInfo()
+        .then((user) => {
+          if (user) {
+            setLoggedIn(true);
+            setCurrentUser({ name: user.name, email: user.email });
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } else {
+      setLoggedIn(false);
+      setCurrentUser({ name: "", email: "" });
+    }
   }, []);
 
   React.useEffect(() => {

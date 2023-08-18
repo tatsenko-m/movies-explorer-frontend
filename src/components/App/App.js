@@ -31,6 +31,7 @@ function App() {
     Boolean(localStorage.getItem("token"))
   );
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isRegistering, setIsRegistering] = React.useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = React.useState(false);
   const initialMovies = JSON.parse(localStorage.getItem("movies")) || [];
   const [movies, setMovies] = React.useState(initialMovies);
@@ -136,7 +137,7 @@ function App() {
   function handleRegister(name, email, password) {
     setIsAuthError(false);
     setAuthErrorMessage("");
-    setIsLoading(true);
+    setIsRegistering(true);
 
     mainApi
       .register(name, email, password)
@@ -154,7 +155,7 @@ function App() {
         }
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsRegistering(false);
       });
   }
 
@@ -374,7 +375,7 @@ function App() {
               <Route
                 path="/signup"
                 element={
-                  isLoading ? (
+                  isRegistering || isLoading ? (
                     <Preloader />
                   ) : (
                     <Register

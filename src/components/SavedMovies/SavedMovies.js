@@ -7,6 +7,7 @@ import Preloader from "../Preloader/Preloader";
 const SavedMovies = ({
   isLoading,
   onMovieDelete,
+  savedMovies,
   savedMoviesSearchResult,
   isShortSavedMovies,
   onShortSavedMoviesCheck,
@@ -20,6 +21,7 @@ const SavedMovies = ({
         isShortSavedMovies={isShortSavedMovies}
         onShortSavedMoviesCheck={onShortSavedMoviesCheck}
         onSearchSavedMovies={onSearchSavedMovies}
+        savedMovies={savedMovies}
       />
       {isLoading ? (
         <Preloader />

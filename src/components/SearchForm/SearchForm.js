@@ -10,6 +10,7 @@ const SearchForm = ({
   onShortSavedMoviesCheck,
   onSearchMovies,
   onSearchSavedMovies,
+  savedMovies,
 }) => {
   const [searchFormInput, setSearchFormInput] = React.useState(() => {
     if (isSavedMovies) {
@@ -56,8 +57,16 @@ const SearchForm = ({
         onSearchSavedMovies(searchFormInput);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isShortMovies, isShortSavedMovies, isSavedMovies]);
+  }, [
+    isShortMovies,
+    isShortSavedMovies,
+    isSavedMovies,
+    savedMovies,
+    inputChanged,
+    onSearchMovies,
+    searchFormInput,
+    onSearchSavedMovies,
+  ]);
 
   return (
     <section className="search">

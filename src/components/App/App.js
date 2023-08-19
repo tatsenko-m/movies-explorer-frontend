@@ -336,6 +336,7 @@ function App() {
                 loggedIn={loggedIn}
                 isLoading={isLoading}
                 onMovieDelete={handleDeleteMovie}
+                savedMovies={savedMovies}
                 savedMoviesSearchResult={savedMoviesSearchResult}
                 isShortSavedMovies={isShortSavedMovies}
                 onShortSavedMoviesCheck={handleShortSavedMoviesCheck}

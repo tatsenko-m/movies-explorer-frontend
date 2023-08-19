@@ -13,9 +13,9 @@ const MoviesCardList = ({
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
   const calculateVisibleMoviesCount = React.useCallback(() => {
-    if (windowWidth >= 1280) {
+    if (windowWidth >= 1020) {
       return 12;
-    } else if (windowWidth >= 768) {
+    } else if (windowWidth >= 684) {
       return 8;
     } else {
       return 5;
@@ -54,9 +54,9 @@ const MoviesCardList = ({
   }, [calculateVisibleMoviesCount]);
 
   const getAdditionalMoviesCount = () => {
-    if (windowWidth >= 1280) {
+    if (windowWidth >= 1020) {
       return 3;
-    } else if (windowWidth >= 768) {
+    } else if (windowWidth >= 684) {
       return 2;
     } else {
       return 2;

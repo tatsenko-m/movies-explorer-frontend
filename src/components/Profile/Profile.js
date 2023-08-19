@@ -25,6 +25,11 @@ const Profile = ({
     return namePattern.test(value);
   };
 
+  const isEmailValid = (value) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(value);
+  };
+
   const handleNameChange = (evt) => {
     const inputValue = evt.target.value;
     setName(inputValue);
@@ -32,6 +37,16 @@ const Profile = ({
       evt.target.setCustomValidity(
         "Используйте только латиницу, кириллицу, пробел или дефис"
       );
+    } else {
+      evt.target.setCustomValidity("");
+    }
+  };
+
+  const handleEmailChange = (evt) => {
+    const inputValue = evt.target.value;
+    setEmail(inputValue);
+    if (!isEmailValid(inputValue)) {
+      evt.target.setCustomValidity("Введите корректный email");
     } else {
       evt.target.setCustomValidity("");
     }
@@ -85,7 +100,7 @@ const Profile = ({
       document.removeEventListener("keydown", handleEscapeKey);
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditing]);
 
   return isLoading ? (
@@ -128,7 +143,7 @@ const Profile = ({
                 className="profile__input"
                 type="email"
                 value={email}
-                onChange={(evt) => setEmail(evt.target.value)}
+                onChange={handleEmailChange}
                 required
                 placeholder="user@example.com"
               />

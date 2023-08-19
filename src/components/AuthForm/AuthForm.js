@@ -26,6 +26,11 @@ const AuthForm = ({
     return namePattern.test(value);
   };
 
+  const isEmailValid = (value) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(value);
+  };
+
   const handleNameChange = (evt) => {
     const inputValue = evt.target.value;
     setName(inputValue);
@@ -33,6 +38,16 @@ const AuthForm = ({
       evt.target.setCustomValidity(
         "Используйте только латиницу, кириллицу, пробел или дефис"
       );
+    } else {
+      evt.target.setCustomValidity("");
+    }
+  };
+
+  const handleEmailChange = (evt) => {
+    const inputValue = evt.target.value;
+    setEmail(inputValue);
+    if (!isEmailValid(inputValue)) {
+      evt.target.setCustomValidity("Введите корректный email");
     } else {
       evt.target.setCustomValidity("");
     }
@@ -98,7 +113,7 @@ const AuthForm = ({
             }`}
             type="email"
             value={email}
-            onChange={(evt) => setEmail(evt.target.value)}
+            onChange={handleEmailChange}
             required
             placeholder="user@example.com"
           />

@@ -228,10 +228,14 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("movies");
-    setCurrentUser({ name: "", email: "" });
+    localStorage.clear();
     setLoggedIn(false);
+    setMovies([]);
+    setApiMovies([]);
+    setIsShortMovies(false);
+    setIsNotFoundMovies(false);
+    setIsMoviesError(false);
+    setCurrentUser({ name: "", email: "" });
     navigate("/");
   }
 

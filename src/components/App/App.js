@@ -54,6 +54,15 @@ function App() {
   const [updateUserErrorMessage, setUpdateUserErrorMessage] =
     React.useState("");
   const [currentUser, setCurrentUser] = React.useState({ name: "", email: "" });
+  const [savedRegisterInputs, setSavedRegisterInputs] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [savedLoginInputs, setSavedLoginInputs] = React.useState({
+    email: "",
+    password: "",
+  });
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -391,6 +400,10 @@ function App() {
                       isAuthError={isAuthError}
                       authErrorMessage={authErrorMessage}
                       onRegister={handleRegister}
+                      savedRegisterInputs={savedRegisterInputs}
+                      setSavedRegisterInputs={setSavedRegisterInputs}
+                      isLoading={isLoading}
+                      isRegistering={isRegistering}
                     />
                   )
                 }
@@ -405,6 +418,10 @@ function App() {
                       isAuthError={isAuthError}
                       authErrorMessage={authErrorMessage}
                       onLogin={handleLogin}
+                      savedLoginInputs={savedLoginInputs}
+                      setSavedLoginInputs={setSavedLoginInputs}
+                      isLoading={isLoading}
+                      isRegistering={isRegistering}
                     />
                   )
                 }

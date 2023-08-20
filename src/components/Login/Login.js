@@ -1,7 +1,15 @@
 import React from "react";
 import AuthForm from "../AuthForm/AuthForm";
 
-const Login = ({ isAuthError, authErrorMessage, onLogin }) => {
+const Login = ({
+  isAuthError,
+  authErrorMessage,
+  onLogin,
+  savedLoginInputs,
+  setSavedLoginInputs,
+  isLoading,
+  isRegistering,
+}) => {
   return (
     <section className="login">
       <AuthForm
@@ -11,6 +19,10 @@ const Login = ({ isAuthError, authErrorMessage, onLogin }) => {
         isAuthError={isAuthError}
         authErrorMessage={authErrorMessage}
         onLogin={onLogin}
+        savedLoginInputs={savedLoginInputs}
+        setSavedLoginInputs={setSavedLoginInputs}
+        isLoading={isLoading}
+        isRegistering={isRegistering}
       />
     </section>
   );

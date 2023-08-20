@@ -1,7 +1,15 @@
 import React from "react";
 import AuthForm from "../AuthForm/AuthForm";
 
-const Register = ({ isAuthError, authErrorMessage, onRegister }) => {
+const Register = ({
+  isAuthError,
+  authErrorMessage,
+  onRegister,
+  savedRegisterInputs,
+  setSavedRegisterInputs,
+  isLoading,
+  isRegistering,
+}) => {
   return (
     <section className="register">
       <AuthForm
@@ -11,6 +19,10 @@ const Register = ({ isAuthError, authErrorMessage, onRegister }) => {
         isAuthError={isAuthError}
         authErrorMessage={authErrorMessage}
         onRegister={onRegister}
+        savedRegisterInputs={savedRegisterInputs}
+        setSavedRegisterInputs={setSavedRegisterInputs}
+        isLoading={isLoading}
+        isRegistering={isRegistering}
       />
     </section>
   );

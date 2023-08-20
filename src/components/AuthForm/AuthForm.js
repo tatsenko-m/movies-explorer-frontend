@@ -11,6 +11,12 @@ const AuthForm = ({
   authErrorMessage,
   onRegister,
   onLogin,
+  savedRegisterInputs,
+  setSavedRegisterInputs,
+  savedLoginInputs,
+  setSavedLoginInputs,
+  isLoading,
+  isRegistering,
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -56,8 +62,17 @@ const AuthForm = ({
   function handleSubmit(evt) {
     evt.preventDefault();
     if (type === "register") {
+      setSavedRegisterInputs({
+        name: name,
+        email: email,
+        password: password,
+      });
       onRegister(name, email, password);
     } else if (type === "login") {
+      setSavedLoginInputs({
+        email: email,
+        password: password,
+      });
       onLogin(email, password);
     } else {
       return;
@@ -87,12 +102,13 @@ const AuthForm = ({
                     : " auth__input_invalid"
                 }`}
                 type="text"
-                value={name}
+                value={isAuthError ? savedRegisterInputs.name : name}
                 onChange={handleNameChange}
                 minLength="2"
                 maxLength="40"
                 required
                 placeholder="Имя"
+                disabled={isLoading || isRegistering}
               />
             </label>
             <span className="auth__input-error">
@@ -112,10 +128,17 @@ const AuthForm = ({
                 : " auth__input_invalid"
             }`}
             type="email"
-            value={email}
+            value={
+              isAuthError && type === "register"
+                ? savedRegisterInputs.email
+                : isAuthError && type === "login"
+                ? savedLoginInputs.email
+                : email
+            }
             onChange={handleEmailChange}
             required
             placeholder="user@example.com"
+            disabled={isLoading || isRegistering}
           />
         </label>
         <span className="auth__input-error">
@@ -133,10 +156,17 @@ const AuthForm = ({
                 : " auth__input_invalid"
             }`}
             type="password"
-            value={password}
+            value={
+              isAuthError && type === "register"
+                ? savedRegisterInputs.password
+                : isAuthError && type === "login"
+                ? savedLoginInputs.password
+                : password
+            }
             onChange={(evt) => setPassword(evt.target.value)}
             required
             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+            disabled={isLoading || isRegistering}
           />
         </label>
         <span className="auth__input-error">
@@ -146,10 +176,13 @@ const AuthForm = ({
       <FormTooltip isError={isAuthError} errorMessage={authErrorMessage} />
       <button
         className={`auth__submit-button ${
-          !formRef.current?.checkValidity() && "auth__submit-button_disabled"
+          (!formRef.current?.checkValidity() || isLoading || isRegistering) &&
+          "auth__submit-button_disabled"
         }`}
         type="submit"
-        disabled={!formRef.current?.checkValidity()}
+        disabled={
+          !formRef.current?.checkValidity() || isLoading || isRegistering
+        }
       >
         {submitButtonText}
       </button>

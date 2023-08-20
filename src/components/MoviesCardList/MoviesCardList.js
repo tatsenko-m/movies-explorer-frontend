@@ -1,5 +1,6 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { WINDOW_WIDTH, NUMBER_OF_MOVIES } from "../../constants/config";
 
 const MoviesCardList = ({
   isSavedMovies,
@@ -13,12 +14,12 @@ const MoviesCardList = ({
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
   const calculateVisibleMoviesCount = React.useCallback(() => {
-    if (windowWidth >= 1020) {
-      return 12;
-    } else if (windowWidth >= 684) {
-      return 8;
+    if (windowWidth >= WINDOW_WIDTH.LARGE) {
+      return NUMBER_OF_MOVIES.INITIAL.MAX;
+    } else if (windowWidth >= WINDOW_WIDTH.MEDIUM) {
+      return NUMBER_OF_MOVIES.INITIAL.MEAN;
     } else {
-      return 5;
+      return NUMBER_OF_MOVIES.INITIAL.MIN;
     }
   }, [windowWidth]);
 
@@ -54,12 +55,12 @@ const MoviesCardList = ({
   }, [calculateVisibleMoviesCount]);
 
   const getAdditionalMoviesCount = () => {
-    if (windowWidth >= 1020) {
-      return 3;
-    } else if (windowWidth >= 684) {
-      return 2;
+    if (windowWidth >= WINDOW_WIDTH.LARGE) {
+      return NUMBER_OF_MOVIES.ADDITIONAL.MAX;
+    } else if (windowWidth >= WINDOW_WIDTH.MEDIUM) {
+      return NUMBER_OF_MOVIES.ADDITIONAL.MEAN;
     } else {
-      return 2;
+      return NUMBER_OF_MOVIES.ADDITIONAL.MIN;
     }
   };
 

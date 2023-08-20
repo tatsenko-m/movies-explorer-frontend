@@ -1,3 +1,5 @@
+import { SHORT_MOVIE_DURATION } from "../constants/config";
+
 export function handleSearchQuery(movies, searchQuery, isShortMovies) {
   const isCyrillic = /[а-яА-ЯЁё]/.test(searchQuery);
 
@@ -8,7 +10,7 @@ export function handleSearchQuery(movies, searchQuery, isShortMovies) {
     const name = movie[searchField];
 
     if (isShortMovies) {
-      return searchPattern.test(name) && movie.duration <= 40;
+      return searchPattern.test(name) && movie.duration <= SHORT_MOVIE_DURATION;
     } else {
       return searchPattern.test(name);
     }

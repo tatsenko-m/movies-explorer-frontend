@@ -22,7 +22,7 @@ const Profile = ({
 
   const isNameValid = (value) => {
     const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
-    return namePattern.test(value);
+    return namePattern.test(value) && value.length >= 2 && value.length <= 30;
   };
 
   const isEmailValid = (value) => {
@@ -35,7 +35,7 @@ const Profile = ({
     setName(inputValue);
     if (!isNameValid(inputValue)) {
       evt.target.setCustomValidity(
-        "Используйте только латиницу, кириллицу, пробел или дефис"
+        "Допустима латиница, кириллица, пробел и дефис: от 2 до 30 символов"
       );
     } else {
       evt.target.setCustomValidity("");
@@ -122,7 +122,7 @@ const Profile = ({
                 value={name}
                 onChange={handleNameChange}
                 minLength="2"
-                maxLength="40"
+                maxLength="30"
                 required
                 placeholder="Имя"
               />

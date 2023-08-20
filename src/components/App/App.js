@@ -152,6 +152,11 @@ function App() {
       .register(name, email, password)
       .then(() => {
         handleLogin(email, password);
+        setSavedRegisterInputs({
+          name: "",
+          email: "",
+          password: "",
+        });
       })
       .catch((err) => {
         setIsAuthError(true);
@@ -196,6 +201,10 @@ function App() {
           .catch((err) => {
             alert(err);
           });
+        setSavedLoginInputs({
+          email: "",
+          password: "",
+        });
         navigate("/movies");
       })
       .catch((err) => {

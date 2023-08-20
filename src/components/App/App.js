@@ -307,6 +307,10 @@ function App() {
     }
   }, [savedMovies, location.pathname]);
 
+  React.useEffect(() => {
+    setIsAuthError(false);
+  }, [location.pathname]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header loggedIn={loggedIn} onOpenMenu={handleHamburgerIconClick} />

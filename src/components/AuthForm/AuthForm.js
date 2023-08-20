@@ -18,9 +18,25 @@ const AuthForm = ({
   isLoading,
   isRegistering,
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState(() => {
+    if (isAuthError && type === "register") {
+      return savedRegisterInputs.name;
+    } else return "";
+  });
+  const [email, setEmail] = useState(() => {
+    if (isAuthError && type === "register") {
+      return savedRegisterInputs.email;
+    } else if (isAuthError && type === "login") {
+      return savedLoginInputs.email;
+    } else return "";
+  });
+  const [password, setPassword] = useState(() => {
+    if (isAuthError && type === "register") {
+      return savedRegisterInputs.password;
+    } else if (isAuthError && type === "login") {
+      return savedLoginInputs.password;
+    } else return "";
+  });
 
   const formRef = useRef(null);
   const nameInputRef = useRef(null);
@@ -102,7 +118,7 @@ const AuthForm = ({
                     : " auth__input_invalid"
                 }`}
                 type="text"
-                value={isAuthError ? savedRegisterInputs.name : name}
+                value={name}
                 onChange={handleNameChange}
                 minLength="2"
                 maxLength="40"
@@ -128,13 +144,7 @@ const AuthForm = ({
                 : " auth__input_invalid"
             }`}
             type="email"
-            value={
-              isAuthError && type === "register"
-                ? savedRegisterInputs.email
-                : isAuthError && type === "login"
-                ? savedLoginInputs.email
-                : email
-            }
+            value={email}
             onChange={handleEmailChange}
             required
             placeholder="user@example.com"
@@ -156,13 +166,7 @@ const AuthForm = ({
                 : " auth__input_invalid"
             }`}
             type="password"
-            value={
-              isAuthError && type === "register"
-                ? savedRegisterInputs.password
-                : isAuthError && type === "login"
-                ? savedLoginInputs.password
-                : password
-            }
+            value={password}
             onChange={(evt) => setPassword(evt.target.value)}
             required
             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"

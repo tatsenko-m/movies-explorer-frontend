@@ -57,16 +57,8 @@ const SearchForm = ({
         onSearchSavedMovies(searchFormInput);
       }
     }
-  }, [
-    isShortMovies,
-    isShortSavedMovies,
-    isSavedMovies,
-    savedMovies,
-    inputChanged,
-    onSearchMovies,
-    searchFormInput,
-    onSearchSavedMovies,
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShortMovies, isShortSavedMovies]);
 
   return (
     <section className="search">

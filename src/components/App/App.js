@@ -327,6 +327,8 @@ function App() {
 
   React.useEffect(() => {
     setIsAuthError(false);
+    setIsNotFoundMovies(false);
+    setIsMoviesError(false);
   }, [location.pathname]);
 
   return (

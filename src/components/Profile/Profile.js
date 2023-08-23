@@ -1,32 +1,114 @@
-import React, { useState, useRef } from "react";
-import FormError from "../FormError/FormError";
+import React from "react";
+import FormTooltip from "../FormTooltip/FormTooltip";
+import Preloader from "../Preloader/Preloader";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const Profile = () => {
-  const initialName = "Виталий";
-  const initialEmail = "pochta@yandex.ru";
-  const isError = false;
+const Profile = ({
+  isLoading,
+  isUpdateUserError,
+  updateUserErrorMessage,
+  isUpdateUserSuccess,
+  onUpdateUser,
+  onSignOut,
+}) => {
+  const currentUser = React.useContext(CurrentUserContext);
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(initialName);
-  const [email, setEmail] = useState(initialEmail);
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [name, setName] = React.useState(currentUser.name);
+  const [email, setEmail] = React.useState(currentUser.email);
 
-  const nameInputRef = useRef(null);
-  const emailInputRef = useRef(null);
+  const nameInputRef = React.useRef(null);
+  const emailInputRef = React.useRef(null);
+
+  const isNameValid = (value) => {
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
+    return namePattern.test(value) && value.length >= 2 && value.length <= 30;
+  };
+
+  const isEmailValid = (value) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(value);
+  };
+
+  const handleNameChange = (evt) => {
+    const inputValue = evt.target.value;
+    setName(inputValue);
+    if (!isNameValid(inputValue)) {
+      evt.target.setCustomValidity(
+        "Допустима латиница, кириллица, пробел и дефис: от 2 до 30 символов"
+      );
+    } else {
+      evt.target.setCustomValidity("");
+    }
+  };
+
+  const handleEmailChange = (evt) => {
+    const inputValue = evt.target.value;
+    setEmail(inputValue);
+    if (!isEmailValid(inputValue)) {
+      evt.target.setCustomValidity("Введите корректный email");
+    } else {
+      evt.target.setCustomValidity("");
+    }
+  };
 
   const handleEditClick = (evt) => {
     evt.preventDefault();
     setIsEditing(true);
+    setName(currentUser.name);
+    setEmail(currentUser.email);
   };
 
-  const handleSaveClick = (evt) => {
+  function handleSubmit(evt) {
     evt.preventDefault();
     setIsEditing(false);
-  };
+    onUpdateUser(name, email);
+  }
 
-  return (
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    function handleEscapeKey(event) {
+      if (event.key === "Escape") {
+        setName(currentUser.name);
+        setEmail(currentUser.email);
+        setIsEditing(false);
+      }
+    }
+
+    function handleOutsideClick(event) {
+      const fieldsContainer = document.querySelector(".profile__form");
+      if (fieldsContainer && !fieldsContainer.contains(event.target)) {
+        setName(currentUser.name);
+        setEmail(currentUser.email);
+        setIsEditing(false);
+      }
+    }
+
+    if (isEditing) {
+      document.addEventListener("keydown", handleEscapeKey);
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditing]);
+
+  return isLoading ? (
+    <Preloader />
+  ) : (
     <section className="profile">
-      <h1 className="profile__title">Привет, Виталий!</h1>
-      <form className="profile__form">
+      <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
+      <form className="profile__form" onSubmit={handleSubmit}>
         <div className="profile__fields">
           <label className="profile__field">
             <span className="profile__caption">Имя</span>
@@ -38,9 +120,9 @@ const Profile = () => {
                 className="profile__input"
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
                 minLength="2"
-                maxLength="40"
+                maxLength="30"
                 required
                 placeholder="Имя"
               />
@@ -61,7 +143,7 @@ const Profile = () => {
                 className="profile__input"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 required
                 placeholder="user@example.com"
               />
@@ -73,17 +155,24 @@ const Profile = () => {
             {emailInputRef.current?.validationMessage}
           </span>
         </div>
-        <FormError isError={isError} errorMessage="При обновлении профиля произошла ошибка." />
+        <FormTooltip
+          isError={isUpdateUserError}
+          errorMessage={updateUserErrorMessage}
+          isSuccess={isUpdateUserSuccess}
+          successMessage="Профиль успешно обновлен"
+        />
         {isEditing ? (
           <button
             className={`profile__save-button ${
-              (!nameInputRef.current?.validity.valid ||
-                !emailInputRef.current?.validity.valid) &&
-              "profile__save-button_disabled"
+              (name === currentUser.name && email === currentUser.email) ||
+              !nameInputRef.current?.validity.valid ||
+              !emailInputRef.current?.validity.valid
+                ? "profile__save-button_disabled"
+                : ""
             }`}
             type="submit"
-            onClick={handleSaveClick}
             disabled={
+              (name === currentUser.name && email === currentUser.email) ||
               !nameInputRef.current?.validity.valid ||
               !emailInputRef.current?.validity.valid
             }
@@ -97,7 +186,11 @@ const Profile = () => {
         )}
       </form>
       {!isEditing && (
-        <button className="profile__signout-button" type="button">
+        <button
+          className="profile__signout-button"
+          type="button"
+          onClick={onSignOut}
+        >
           Выйти из аккаунта
         </button>
       )}

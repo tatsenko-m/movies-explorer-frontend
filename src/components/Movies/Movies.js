@@ -1,29 +1,42 @@
-import React from 'react';
+import React from "react";
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
-const Movies = () => {
-  const isSavedMovies = false;
-
+const Movies = ({
+  isLoading,
+  isShortMovies,
+  onShortMoviesCheck,
+  onSearchMovies,
+  isNotFoundMovies,
+  isMoviesError,
+  onMovieSave,
+  onMovieDelete,
+  savedMovies,
+  movies,
+}) => {
   return (
     <>
-      <SearchForm />
-      <MoviesCardList isSavedMovies={isSavedMovies} isMoreButtonVisible={true}>
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-        <MoviesCard isSavedMovies={isSavedMovies} isSaved={false} />
-      </MoviesCardList>
+      <SearchForm
+        isSavedMovies={false}
+        isShortMovies={isShortMovies}
+        onShortMoviesCheck={onShortMoviesCheck}
+        onSearchMovies={onSearchMovies}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isSavedMovies={false}
+          isNotFoundMovies={isNotFoundMovies}
+          isMoviesError={isMoviesError}
+          onMovieSave={onMovieSave}
+          onMovieDelete={onMovieDelete}
+          savedMovies={savedMovies}
+          movies={movies}
+        />
+      )}
     </>
   );
 };

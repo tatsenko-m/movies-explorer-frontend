@@ -1,22 +1,102 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import FormError from "../FormError/FormError";
+import FormTooltip from "../FormTooltip/FormTooltip";
 
-const AuthForm = ({ type, heading, submitButtonText }) => {
-  const isError = false;
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const AuthForm = ({
+  type,
+  heading,
+  submitButtonText,
+  isAuthError,
+  authErrorMessage,
+  onRegister,
+  onLogin,
+  savedRegisterInputs,
+  setSavedRegisterInputs,
+  savedLoginInputs,
+  setSavedLoginInputs,
+  isLoading,
+  isRegistering,
+}) => {
+  const [name, setName] = useState(() => {
+    if (isAuthError && type === "register") {
+      return savedRegisterInputs.name;
+    } else return "";
+  });
+  const [email, setEmail] = useState(() => {
+    if (isAuthError && type === "register") {
+      return savedRegisterInputs.email;
+    } else if (isAuthError && type === "login") {
+      return savedLoginInputs.email;
+    } else return "";
+  });
+  const [password, setPassword] = useState(() => {
+    if (isAuthError && type === "register") {
+      return savedRegisterInputs.password;
+    } else if (isAuthError && type === "login") {
+      return savedLoginInputs.password;
+    } else return "";
+  });
 
   const formRef = useRef(null);
   const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
+  const isNameValid = (value) => {
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
+    return namePattern.test(value) && value.length >= 2 && value.length <= 30;
+  };
+
+  const isEmailValid = (value) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(value);
+  };
+
+  const handleNameChange = (evt) => {
+    const inputValue = evt.target.value;
+    setName(inputValue);
+    if (!isNameValid(inputValue)) {
+      evt.target.setCustomValidity(
+        "Допустима латиница, кириллица, пробел и дефис: от 2 до 30 символов"
+      );
+    } else {
+      evt.target.setCustomValidity("");
+    }
+  };
+
+  const handleEmailChange = (evt) => {
+    const inputValue = evt.target.value;
+    setEmail(inputValue);
+    if (!isEmailValid(inputValue)) {
+      evt.target.setCustomValidity("Введите корректный email");
+    } else {
+      evt.target.setCustomValidity("");
+    }
+  };
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (type === "register") {
+      setSavedRegisterInputs({
+        name: name,
+        email: email,
+        password: password,
+      });
+      onRegister(name, email, password);
+    } else if (type === "login") {
+      setSavedLoginInputs({
+        email: email,
+        password: password,
+      });
+      onLogin(email, password);
+    } else {
+      return;
+    }
+  }
+
   return (
-    <form ref={formRef} className="auth__form">
+    <form ref={formRef} className="auth__form" onSubmit={handleSubmit}>
       <Logo />
       <h2 className="auth__heading">{heading}</h2>
       <div
@@ -39,11 +119,12 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
                 }`}
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
                 minLength="2"
-                maxLength="40"
+                maxLength="30"
                 required
                 placeholder="Имя"
+                disabled={isLoading || isRegistering}
               />
             </label>
             <span className="auth__input-error">
@@ -64,9 +145,10 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             }`}
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
             placeholder="user@example.com"
+            disabled={isLoading || isRegistering}
           />
         </label>
         <span className="auth__input-error">
@@ -85,22 +167,26 @@ const AuthForm = ({ type, heading, submitButtonText }) => {
             }`}
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(evt) => setPassword(evt.target.value)}
             required
             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+            disabled={isLoading || isRegistering}
           />
         </label>
         <span className="auth__input-error">
           {passwordInputRef.current?.validationMessage}
         </span>
       </div>
-      <FormError isError={isError} errorMessage="Ошибка." />
+      <FormTooltip isError={isAuthError} errorMessage={authErrorMessage} />
       <button
         className={`auth__submit-button ${
-          !formRef.current?.checkValidity() && "auth__submit-button_disabled"
+          (!formRef.current?.checkValidity() || isLoading || isRegistering) &&
+          "auth__submit-button_disabled"
         }`}
         type="submit"
-        disabled={!formRef.current?.checkValidity()}
+        disabled={
+          !formRef.current?.checkValidity() || isLoading || isRegistering
+        }
       >
         {submitButtonText}
       </button>

@@ -24,8 +24,11 @@
   font-size: 15px;
   font-weight: 500;
   line-height: 18px;
-  margin: 0;
+  margin: 0 6px 0 0;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movies-card__duration {
@@ -36,6 +39,9 @@
   line-height: 18px;
   margin: 0;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movies-card__image {
@@ -45,6 +51,7 @@
   min-height: 168px;
   object-fit: cover;
   object-position: center center;
+  cursor: pointer;
 }
 
 .movies-card__footer {

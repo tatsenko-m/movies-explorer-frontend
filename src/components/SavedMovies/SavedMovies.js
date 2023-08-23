@@ -1,20 +1,36 @@
-import React from 'react';
+import React from "react";
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
-const SavedMovies = () => {
-  const isSavedMovies = true;
-
+const SavedMovies = ({
+  isLoading,
+  onMovieDelete,
+  savedMoviesSearchResult,
+  isShortSavedMovies,
+  onShortSavedMoviesCheck,
+  onSearchSavedMovies,
+  isNotFoundMovies,
+}) => {
   return (
     <>
-      <SearchForm />
-      <MoviesCardList isSavedMovies={isSavedMovies} isMoreButtonVisible={false}>
-        <MoviesCard isSavedMovies={isSavedMovies} />
-        <MoviesCard isSavedMovies={isSavedMovies} />
-        <MoviesCard isSavedMovies={isSavedMovies} />
-      </MoviesCardList>
+      <SearchForm
+        isSavedMovies={true}
+        isShortSavedMovies={isShortSavedMovies}
+        onShortSavedMoviesCheck={onShortSavedMoviesCheck}
+        onSearchSavedMovies={onSearchSavedMovies}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isSavedMovies={true}
+          isNotFoundMovies={isNotFoundMovies}
+          onMovieDelete={onMovieDelete}
+          savedMovies={savedMoviesSearchResult}
+        />
+      )}
     </>
   );
 };

@@ -9,16 +9,24 @@ const AboutMe = () => {
       <div className="about-me__profile">
         <img className="about-me__photo" src={studentPhoto} alt="Мое фото" />
         <div className="about-me__text">
-          <h3 className="about-me__name">Виталий</h3>
-          <p className="about-me__caption">Фронтенд-разработчик, 30 лет</p>
+          <h3 className="about-me__name">Михаил</h3>
+          <p className="about-me__caption">Фронтенд-разработчик, 27 лет</p>
           <p className="about-me__bio">
-            Я родился и живу в Саратове, закончил факультет экономики СГУ. У
-            меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-            бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
-            Контур». После того, как прошёл курс по веб-разработке, начал
-            заниматься фриланс-заказами и ушёл с постоянной работы.
+            Я живу в Москве, закончил факультет менеджмента НИУ ВШЭ. Я люблю
+            слушать музыку, а ещё увлекаюсь сноубордом. С 2018 года работал в
+            сфере государственных закупок: менеджером по тендерам в компании
+            «Европлан», а также сооснователем собственного дела по поставкам
+            товаров государству. Недавно начал кодить и решил пройти курс по
+            веб-разработке, чтобы реализовать себя в более технологичной сфере,
+            которая меня давно привлекала.
           </p>
-          <Link to="https://github.com/tatsenko-m" target="_blank" className="about-me__social-link">Github</Link>
+          <Link
+            to="https://github.com/tatsenko-m"
+            target="_blank"
+            className="about-me__social-link"
+          >
+            Github
+          </Link>
         </div>
       </div>
     </section>

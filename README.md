@@ -16,7 +16,3 @@ IP 51.250.72.22
 Frontend https://movies-explore.nomoredomains.xyz
 
 Backend https://api.movies-explore.nomoredomains.xyz
-
-## Ссылка на пул реквест
-
-https://github.com/tatsenko-m/movies-explorer-frontend/pull/2
